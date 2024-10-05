@@ -28,6 +28,7 @@ public class Driver {
     private User user;
 
     @OneToMany(mappedBy = "driver")
+    @JsonManagedReference
     private List<Vehicle> vehicles;
 
     @OneToMany(mappedBy = "driver")

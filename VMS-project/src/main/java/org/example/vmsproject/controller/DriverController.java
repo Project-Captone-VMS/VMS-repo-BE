@@ -1,7 +1,7 @@
 package org.example.vmsproject.controller;
 
 import org.example.vmsproject.entity.Driver;
-import org.example.vmsproject.service.Interface.DriverIService;
+import org.example.vmsproject.service.Interface.IDriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 public class DriverController {
 
     @Autowired
-    private DriverIService driverService;
+    private IDriverService driverService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Driver>> getAllDrivers() {

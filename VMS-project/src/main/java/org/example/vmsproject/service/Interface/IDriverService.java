@@ -4,7 +4,7 @@ import org.example.vmsproject.entity.Driver;
 
 import java.util.List;
 
-public interface DriverIService {
+public interface IDriverService {
     List<Driver> getAllDrivers();
     Driver getDriverById(long id);
     String updateDriver(long id, Driver driver);
