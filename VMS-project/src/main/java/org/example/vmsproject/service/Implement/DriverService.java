@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DriverService implements IDriverService {
+
     @Autowired
     private DriverRepository driverRepository;
 
@@ -19,19 +21,19 @@ public class DriverService implements IDriverService {
     }
 
     @Override
-    public Driver getDriverById(long id) {
-        return driverRepository.findById(id).orElse(null);
+    public Optional<Driver> getDriverById(long id) {
+        return driverRepository.findById(id);
     }
 
     @Override
     public String updateDriver(long id, Driver driver) {
-        return driverRepository.findById(id).map(driverUpdate -> {
-            driverUpdate.setFirstName(driver.getFirstName());
-            driverUpdate.setLastName(driver.getLastName());
-            driverUpdate.setLicenseNumber(driver.getLicenseNumber());
-            driverUpdate.setWorkSchedule(driver.getWorkSchedule());
-            driverUpdate.setStatus(driver.getStatus());
-            driverRepository.save(driverUpdate);
+        return driverRepository.findById(id).map(existingDriver -> {
+            existingDriver.setFirstName(driver.getFirstName());
+            existingDriver.setLastName(driver.getLastName());
+            existingDriver.setLicenseNumber(driver.getLicenseNumber());
+            existingDriver.setWorkSchedule(driver.getWorkSchedule());
+            existingDriver.setStatus(driver.getStatus());
+            driverRepository.save(existingDriver);
             return "Driver updated successfully!";
         }).orElse("Driver not found!");
     }
@@ -44,7 +46,7 @@ public class DriverService implements IDriverService {
 
     @Override
     public String deleteDriver(long id) {
-        if(driverRepository.existsById(id)) {
+        if (driverRepository.existsById(id)) {
             driverRepository.deleteById(id);
             return "Driver deleted successfully!";
         } else {
