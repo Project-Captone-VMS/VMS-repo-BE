@@ -19,6 +19,8 @@ public class Shipment {
     private String status;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private String startLocation;
+    private String endLacation;
 
     @ManyToOne
     @JoinColumn(name = "route_id")
