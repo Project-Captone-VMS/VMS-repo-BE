@@ -5,21 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="warehose")
-public class Warehouse {
+@Table(name = "product")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long warehouseId;
-    private String location;
-    private int capacity;
-    private int currentStock;
+    private Long productId;
+    private String productName;
+    private double price;
+    private int quantity;
 
-    @OneToMany(mappedBy = "warehouse")
-    private List<Shipment> shipments;
+    @ManyToOne
+    @JoinColumn(name = "warsehose_id")
+    private Warehouse warehouse;
 }

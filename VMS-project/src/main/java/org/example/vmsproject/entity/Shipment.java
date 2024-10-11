@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,20 +16,15 @@ public class Shipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long shipmentId;
-
     private String status;
+    private String startLocation;
+    private String endLocation;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
-
-    @ManyToOne
-    @JoinColumn(name = "driver_id")
-    private Driver driver;
-
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
