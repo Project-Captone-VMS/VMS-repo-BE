@@ -5,26 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="shipment")
-public class Shipment {
+@Table(name = "product")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long shipmentId;
-    private String status;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private Long productId;
+    private String productName;
+    private double price;
+    private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "route_id")
-    private Route route;
-
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id")
+    @JoinColumn(name = "warsehose_id")
     private Warehouse warehouse;
 }

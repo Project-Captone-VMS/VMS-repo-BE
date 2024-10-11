@@ -22,8 +22,15 @@ public class Route {
     private String estimatedTime;
     private String status;
 
-    @OneToMany(mappedBy = "route")
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
     private List<Shipment> shipments;
-    @OneToMany(mappedBy = "route")
-    private List<RouteVehicle> routeVehicles;
+
+    @OneToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+
+    @OneToOne
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
+
 }

@@ -22,16 +22,7 @@ public class Driver {
     private String workSchedule;
     private String status;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @OneToMany(mappedBy = "driver")
-    private List<Vehicle> vehicles;
-
-    @OneToMany(mappedBy = "driver")
-    private List<Shipment>shipments;
-
     @OneToMany(mappedBy = "driver")
     private List<Expense>expenses;
+
 }

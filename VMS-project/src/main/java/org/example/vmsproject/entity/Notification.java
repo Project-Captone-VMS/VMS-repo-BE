@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,4 +27,7 @@ public class Notification {
     private boolean isRead;   // Trạng thái đã đọc của thông báo
 
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "notification")
+    private List<UserNotification> userNotifications;
 }
