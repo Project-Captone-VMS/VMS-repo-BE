@@ -1,5 +1,6 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Role {
     private ERole name;
 
     @OneToMany(mappedBy = "role")
+    @JsonBackReference
     private List<User> users;
 
 }

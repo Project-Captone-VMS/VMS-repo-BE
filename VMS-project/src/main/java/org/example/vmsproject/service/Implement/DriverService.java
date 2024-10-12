@@ -1,5 +1,6 @@
 package org.example.vmsproject.service.Implement;
 
+import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.repository.DriverRepository;
 import org.example.vmsproject.service.Interface.IDriverService;
@@ -26,31 +27,28 @@ public class DriverService implements IDriverService {
     }
 
     @Override
-    public String updateDriver(long id, Driver driver) {
-        return driverRepository.findById(id).map(existingDriver -> {
-            existingDriver.setFirstName(driver.getFirstName());
-            existingDriver.setLastName(driver.getLastName());
-            existingDriver.setLicenseNumber(driver.getLicenseNumber());
-            existingDriver.setWorkSchedule(driver.getWorkSchedule());
-            existingDriver.setStatus(driver.getStatus());
-            driverRepository.save(existingDriver);
-            return "Driver updated successfully!";
-        }).orElse("Driver not found!");
-    }
-
-    @Override
-    public String addDriver(Driver driver) {
-        driverRepository.save(driver);
-        return "Driver added successfully!";
+    public String updateDriver(long id, DriverDTO driverDTO) {
+        Optional<Driver> optionalDriver = driverRepository.findById(id);
+        if (optionalDriver.isPresent()) {
+            Driver driver = optionalDriver.get();
+            driver.setLicenseNumber(driverDTO.getLicenseNumber());
+            driver.setWorkSchedule(driverDTO.getWorkSchedule());
+            driver.setStatus(driverDTO.getStatus());
+            driverRepository.save(driver);
+            return "Driver updated successfully.";
+        } else {
+            return "Driver not found.";
+        }
     }
 
     @Override
     public String deleteDriver(long id) {
-        if (driverRepository.existsById(id)) {
-            driverRepository.deleteById(id);
-            return "Driver deleted successfully!";
+        Optional<Driver> optionalDriver = driverRepository.findById(id);
+        if (optionalDriver.isPresent()) {
+            driverRepository.delete(optionalDriver.get());
+            return "Driver deleted successfully.";
         } else {
-            return "Driver not found!";
+            return "Driver not found.";
         }
     }
 }

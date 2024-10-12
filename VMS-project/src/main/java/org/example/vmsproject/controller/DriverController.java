@@ -1,6 +1,7 @@
 package org.example.vmsproject.controller;
 
 import jakarta.validation.Valid;
+import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.service.Interface.IDriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +28,12 @@ public class DriverController {
     @GetMapping("/{id}")
     public ResponseEntity<Driver> getDriverById(@PathVariable("id") long id) {
         Optional<Driver> driver = driverService.getDriverById(id);
-        if (driver.isPresent()) {
-            return ResponseEntity.ok(driver.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<String> addDriver(@Valid @RequestBody Driver driver) {
-        String result = driverService.addDriver(driver);
-        return ResponseEntity.ok(result);
+        return driver.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateDriver(@PathVariable("id") long id, @Valid @RequestBody Driver driver) {
-        String result = driverService.updateDriver(id, driver);
+    public ResponseEntity<String> updateDriver(@PathVariable("id") long id, @RequestBody DriverDTO driverDTO) {
+        String result = driverService.updateDriver(id, driverDTO);
         return ResponseEntity.ok(result);
     }
 
