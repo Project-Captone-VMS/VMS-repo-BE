@@ -32,14 +32,14 @@ public class DriverController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateDriver(@PathVariable("id") long id, @RequestBody DriverDTO driverDTO) {
+    public ResponseEntity<String> updateDriver(@PathVariable("id") long id, @Valid @RequestBody DriverDTO driverDTO) {
         String result = driverService.updateDriver(id, driverDTO);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDriver(@PathVariable("id") long id) {
-        String result = driverService.deleteDriver(id);
+        String result = driverService.softDeleteDriver(id);
         return ResponseEntity.ok(result);
     }
 }

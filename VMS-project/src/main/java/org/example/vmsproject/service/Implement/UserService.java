@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 
 @Service
@@ -24,11 +24,26 @@ public class UserService implements IUserService {
 
 
     @Override
-    public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream().map(user -> new UserDTO(user.getUserId(), user.getUsername(),
-                user.getFirstName(), user.getLastName(), user.getPassword(), user.getRole().getRoleId()))
-                .collect(Collectors.toList());
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
+//
+//    @Override
+//    public String deleteUser(Long id) {
+//        Optional<User> user = userRepository.findById(id);
+//        if(user.isPresent()) {
+//            driverRepository.deleteByUserUserId(id);
+//            userRepository.delete(user.get());
+//            return "User deleted successfully";
+//        }else{
+//            return "User not found";
+//        }
+//    }
+
+//    @Override
+//    public User getUser(Long id) {
+//        return userRepository.findById(id).orElse(null);
+//    }
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
@@ -43,6 +58,7 @@ public class UserService implements IUserService {
 
         if (savedUser.getRole().getRoleId() == 2) {
             Driver driver = new Driver();
+            driver.setIsDeleted(false);
             driver.setDriverId(savedUser.getUserId());
             driver.setFirstName(savedUser.getFirstName());
             driver.setLastName(savedUser.getLastName());

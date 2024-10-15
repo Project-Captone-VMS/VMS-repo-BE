@@ -1,5 +1,6 @@
 package org.example.vmsproject.service.Implement;
 
+import org.example.vmsproject.dto.VehicleDTO;
 import org.example.vmsproject.entity.Vehicle;
 import org.example.vmsproject.repository.VehicleRepository;
 import org.example.vmsproject.service.Interface.IVehicleService;
@@ -24,20 +25,26 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public String updateVehicle(long id, Vehicle vehicle) {
-        return vehicleRepository.findById(id).map(vehicleUpdate ->{
-            vehicleUpdate.setLicensePlate(vehicle.getLicensePlate());
-            vehicleUpdate.setType(vehicle.getType());
-            vehicleUpdate.setCapacity(vehicle.getCapacity());
-            vehicleUpdate.setStatus(vehicle.getStatus());
-            vehicleUpdate.setMaintenanceSchedule(vehicle.getMaintenanceSchedule());
-            vehicleRepository.save(vehicleUpdate);
+    public String updateVehicle(long id, VehicleDTO vehicleDTO) {
+        return vehicleRepository.findById(id).map(vehicle-> {
+            vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
+            vehicle.setType(vehicleDTO.getType());
+            vehicle.setCapacity(vehicleDTO.getCapacity());
+            vehicle.setStatus(vehicleDTO.getStatus());
+            vehicle.setMaintenanceSchedule(vehicleDTO.getMaintenanceSchedule());
+            vehicleRepository.save(vehicle);
             return "Vehicle updated successfully!";
         }).orElse("Vehicle not found!");
     }
 
     @Override
-    public String addVehicle(Vehicle vehicle) {
+    public String addVehicle(VehicleDTO vehicleDTO) {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
+        vehicle.setType(vehicleDTO.getType());
+        vehicle.setCapacity(vehicleDTO.getCapacity());
+        vehicle.setStatus(vehicleDTO.getStatus());
+        vehicle.setMaintenanceSchedule(vehicleDTO.getMaintenanceSchedule());
         vehicleRepository.save(vehicle);
         return "Vehicle added successfully!";
     }

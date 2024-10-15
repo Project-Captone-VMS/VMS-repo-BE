@@ -7,6 +7,7 @@ import org.example.vmsproject.service.Interface.IDriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class DriverService implements IDriverService {
 
     @Override
     public List<Driver> getAllDrivers() {
-        return driverRepository.findAll();
+        return driverRepository.findAllDeleted();
     }
 
     @Override
@@ -42,10 +43,13 @@ public class DriverService implements IDriverService {
     }
 
     @Override
-    public String deleteDriver(long id) {
+    public String softDeleteDriver(long id) {
         Optional<Driver> optionalDriver = driverRepository.findById(id);
         if (optionalDriver.isPresent()) {
-            driverRepository.delete(optionalDriver.get());
+            Driver driver = optionalDriver.get();
+            driver.setIsDeleted(true);
+            driver.setDeleteAt(LocalDateTime.now());
+            driverRepository.save(driver);
             return "Driver deleted successfully.";
         } else {
             return "Driver not found.";
