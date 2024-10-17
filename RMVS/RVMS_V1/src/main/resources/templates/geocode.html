@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Geocode Result</title>
+</head>
+<body>
+<h1>Geocode Result for: <span th:text="${location}"></span></h1>
+
+<pre th:text="${geocodeResponse}">Geocode response will be displayed here</pre>
+
+<form action="/geocode" method="get">
+    <label for="location">Enter Location:</label>
+    <input type="text" id="location" name="location" required>
+    <button type="submit">Get Geocode</button>
+</form>
+</body>
+</html>

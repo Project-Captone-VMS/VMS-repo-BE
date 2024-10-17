@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Here Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #map {
+            height: 600px; /* Chiều cao của bản đồ */
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@here/maps-api-for-javascript@3.1.30/dist/mapsjs-core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@here/maps-api-for-javascript@3.1.30/dist/mapsjs-service.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@here/maps-api-for-javascript@3.1.30/dist/mapsjs-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@here/maps-api-for-javascript@3.1.30/dist/mapsjs-mapevents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@here/maps-api-for-javascript@3.1.30/dist/mapsjs-data.js"></script>
+</head>
+<body>
+
+<h1>Here Map Example</h1>
+
+<div id="map"></div>
+
+<script>
+    // Khởi tạo bản đồ
+    var platform = new H.service.Platform({
+        'apikey': /*[[${hereApiKey}]]*/ '${hereApiKey}' // Lấy API key từ Thymeleaf
+    });
+
+    var defaultLayers = platform.createDefaultLayers();
+
+    var map = new H.Map(
+        document.getElementById('map'),
+        defaultLayers.vector.normal.map,
+        {
+            zoom: 10,
+            center: { lat: 20.5937, lng: 78.9629 } // Toạ độ mặc định (Ấn Độ)
+        });
+
+    // Khởi tạo UI cho bản đồ
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+    // Thêm sự kiện bản đồ
+    var mapEvents = new H.mapevents.MapEvents(map);
+    var behavior = new H.mapevents.Behavior(mapEvents);
+
+    // Thêm marker vào bản đồ
+    var marker = new H.map.Marker({ lat: 20.5937, lng: 78.9629 });
+    map.addObject(marker);
+    marker.setPopup(new H.ui.InfoBubble(marker.getGeometry(), {
+        content: '<b>Ấn Độ</b>'
+    }));
+    marker.openBubble();
+</script>
+
+</body>
+</html>
