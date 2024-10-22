@@ -28,7 +28,7 @@ public class SecurityConfig {
     private CustomJwtDecoder customJwtDecoder;
 
     private final String[] PUBLIC_ENDPOINTS = {
-            "/api/users", "/api/auth/token", "/api/auth/introspect", "/api/auth/logout"
+            "/api/auth/token", "/api/auth/introspect", "/api/auth/logout",  "/api/user/create"
     };
 
 //    @Value("${jwt.signerKey}")
@@ -37,7 +37,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
-                request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+                request.requestMatchers(PUBLIC_ENDPOINTS).permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/api/user/*")
 //                        .hasRole(ERole.ADMIN.name())
                         .anyRequest().authenticated());

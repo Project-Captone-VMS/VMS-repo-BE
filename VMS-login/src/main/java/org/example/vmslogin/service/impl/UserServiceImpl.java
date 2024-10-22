@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
 //    @PreAuthorize("hasRole('ADMIN')")
-    @PreAuthorize("hasAuthority('READ_DATA')")
+//    @PreAuthorize("hasAuthority('READ_DATA')")
     @Override
     public List<UserResponse> findAllUser() {
         log.info("In method get Users");

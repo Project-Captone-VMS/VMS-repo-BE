@@ -12,10 +12,7 @@ import org.example.vmslogin.dto.response.ApiResponse;
 import org.example.vmslogin.dto.response.AuthenticationResponse;
 import org.example.vmslogin.dto.response.IntrospectionResponse;
 import org.example.vmslogin.service.impl.AuthenticationServiceImpl;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
@@ -23,6 +20,7 @@ import java.text.ParseException;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class AuthenticationController {
     AuthenticationServiceImpl authenticationService;
 
