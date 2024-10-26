@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -38,19 +39,22 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
     RoleRepository roleRepository;
 
-    @Override
     public User saveUser(CreateUserRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTS);
         }
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        HashSet<String> roles = new HashSet<>();
-        roles.add(ERole.USER.name());
-//        user.setRoles(roles);
+
+        Role userRole = roleRepository.findByName("USER")
+                .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+        Set<Role> roles = new HashSet<>();
+        roles.add(userRole);
+        user.setRoles(roles);
 
         return userRepository.save(user);
     }
+
 
 //    @PreAuthorize("hasRole('ADMIN')")
 //    @PreAuthorize("hasAuthority('READ_DATA')")

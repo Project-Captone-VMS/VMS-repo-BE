@@ -16,6 +16,7 @@ import org.example.vmslogin.dto.request.LogoutRequest;
 import org.example.vmslogin.dto.response.AuthenticationResponse;
 import org.example.vmslogin.dto.response.IntrospectionResponse;
 import org.example.vmslogin.entity.InvalidatedToken;
+import org.example.vmslogin.entity.Role;
 import org.example.vmslogin.entity.User;
 import org.example.vmslogin.exception.AppException;
 import org.example.vmslogin.exception.ErrorCode;
@@ -31,8 +32,10 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Set;
 import java.util.StringJoiner;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -56,8 +59,13 @@ public class AuthenticationServiceImpl {
 
         var token = generateToken(user);
 
+        Set<String> roles = user.getRoles().stream()
+                .map(Role::getName)
+                .collect(Collectors.toSet());
+
         return AuthenticationResponse.builder()
                 .token(token)
+                .roles(roles)
                 .authenticated(true)
                 .build();
     }

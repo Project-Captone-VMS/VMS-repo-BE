@@ -27,12 +27,26 @@ import java.util.List;
 public class UserController {
     UserService userService;
 
+
+
     @PostMapping("/create")
-    public ApiResponse<User> saveUser(@RequestBody @Valid CreateUserRequest request) {
-        ApiResponse<User> apiResponse = new ApiResponse<>();
-        apiResponse.setResult(userService.saveUser(request));
-        return apiResponse;
+    public ApiResponse<User> registerUser(@RequestBody CreateUserRequest request) {
+        User user = userService.saveUser(request);
+        return ApiResponse.<User>builder()
+                .result(user)
+                .build();
     }
+
+
+//    @PostMapping("/create")
+//    public ApiResponse<User> saveUser(@RequestBody @Valid CreateUserRequest request) {
+//        ApiResponse<User> apiResponse = new ApiResponse<>();
+//        apiResponse.setResult(userService.saveUser(request));
+//        return apiResponse;
+//    }
+
+
+
 
     @GetMapping("/list")
    ApiResponse<List<UserResponse>> findAllUser() {
