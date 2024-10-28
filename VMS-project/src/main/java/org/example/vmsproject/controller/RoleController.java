@@ -1,22 +1,43 @@
 package org.example.vmsproject.controller;
 
-import org.example.vmsproject.entity.Role;
-import org.example.vmsproject.service.Implement.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+import org.example.vmsproject.dto.request.RoleRequest;
+import org.example.vmsproject.dto.response.ApiResponse;
+import org.example.vmsproject.dto.response.RoleResponse;
+import org.example.vmsproject.service.RoleService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/api/role")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
+@CrossOrigin("*")
 public class RoleController {
-    @Autowired
-    private RoleService roleService;
+    RoleService roleService;
 
-    @GetMapping
-    public List<Role> getAllRoles() {
-        return roleService.getRoles();
+    @PostMapping("/create")
+    ApiResponse<RoleResponse> create(@RequestBody RoleRequest request) {
+        return ApiResponse.<RoleResponse>builder()
+                .result(roleService.create(request))
+                .build();
+    }
+
+    @GetMapping("/list")
+     ApiResponse<List<RoleResponse>> getAll(){
+        return ApiResponse.<List<RoleResponse>>builder()
+                .result(roleService.getAll())
+                .build();
+    }
+
+    @DeleteMapping("/delete/{name}")
+    ApiResponse<Void> delete(@PathVariable String name){
+        roleService.delete(name);
+        return ApiResponse.<Void>builder().build();
     }
 }

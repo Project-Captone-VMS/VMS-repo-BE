@@ -1,27 +1,26 @@
 package org.example.vmsproject.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-import java.util.List;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name="role")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roleId;
-    @Enumerated(EnumType.STRING)
-    private ERole name;
+    String name;
 
-    @OneToMany(mappedBy = "role")
-    @JsonBackReference
-    private List<User> users;
+    String description;
 
+    @ManyToMany
+    Set<Permission>permissions;
 }
