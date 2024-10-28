@@ -22,6 +22,7 @@ public class Shipment {
     private String startLocation;
     private String endLocation;
 
+
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;

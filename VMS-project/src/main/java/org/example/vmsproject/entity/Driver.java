@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,6 +22,10 @@ public class Driver {
     private String licenseNumber;
     private String workSchedule;
     private String status;
+    private Boolean isDeleted = false;
+    private LocalDateTime deleteAt;
+
+
 
     @OneToMany(mappedBy = "driver")
     private List<Expense>expenses;

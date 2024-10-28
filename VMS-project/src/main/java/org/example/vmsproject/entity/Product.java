@@ -22,3 +22,4 @@ public class Product {
     @JoinColumn(name = "warsehose_id")
     private Warehouse warehouse;
 }
+

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -20,7 +21,8 @@ public class Vehicle {
     private String type;
     private int capacity;
     private String status;
-    private String maintenanceSchedule;
+    private LocalDate maintenanceSchedule;
+
 
     @OneToMany(mappedBy = "vehicle")
     private List<Incident> incidents;
@@ -29,5 +31,5 @@ public class Vehicle {
     private List<Expense> expenses;
 
 
-
 }
+
