@@ -7,14 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.vmsproject.dto.request.CreateUserRequest;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
 import org.example.vmsproject.dto.response.UserResponse;
+import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.entity.Role;
 import org.example.vmsproject.entity.User;
 import org.example.vmsproject.exception.AppException;
 import org.example.vmsproject.exception.ErrorCode;
 import org.example.vmsproject.mapper.UserMapper;
+import org.example.vmsproject.repository.DriverRepository;
 import org.example.vmsproject.repository.RoleRepository;
 import org.example.vmsproject.repository.UserRepository;
-import org.example.vmsproject.service.UserService;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
     RoleRepository roleRepository;
+    DriverRepository driverRepository;
 
     public User saveUser(CreateUserRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -47,11 +49,19 @@ public class UserServiceImpl implements UserService {
         roles.add(userRole);
         user.setRoles(roles);
 
+        Driver driver = Driver.builder().driverId(request.getId())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber()).build();
+
+        driverRepository.save(driver);
+
         return userRepository.save(user);
     }
 
 
-//    @PreAuthorize("hasRole('ADMIN')")
+    //    @PreAuthorize("hasRole('ADMIN')")
 //    @PreAuthorize("hasAuthority('READ_DATA')")
     @Override
     public List<UserResponse> findAllUser() {
@@ -71,12 +81,12 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found")));
     }
 
-    public UserResponse getMyInfo(){
-        var context= SecurityContextHolder.getContext();
+    public UserResponse getMyInfo() {
+        var context = SecurityContextHolder.getContext();
         String name = context.getAuthentication().getName();
         userRepository.findByUsername(name);
         User user = userRepository.findByUsername(name).orElseThrow(
-                ()-> new AppException(ErrorCode.USER_NOT_EXISTS));
+                () -> new AppException(ErrorCode.USER_NOT_EXISTS));
         return userMapper.toUserResponse(user);
     }
 

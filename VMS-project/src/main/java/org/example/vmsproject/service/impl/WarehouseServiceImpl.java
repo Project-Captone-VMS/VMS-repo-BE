@@ -1,16 +1,16 @@
-package org.example.vmsproject.service.Implement;
+package org.example.vmsproject.service.impl;
 
 import org.example.vmsproject.dto.WarehouseDTO;
 import org.example.vmsproject.entity.Warehouse;
 import org.example.vmsproject.repository.WarehouseRepository;
-import org.example.vmsproject.service.IWarehouseService;
+import org.example.vmsproject.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class WarehouseService implements IWarehouseService {
+public class WarehouseServiceImpl implements WarehouseService {
 
     @Autowired
     private WarehouseRepository warehouseRepository;

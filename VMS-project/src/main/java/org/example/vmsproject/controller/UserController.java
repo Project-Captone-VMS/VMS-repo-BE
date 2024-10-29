@@ -9,7 +9,6 @@ import org.example.vmsproject.dto.request.UpdateUserRequest;
 import org.example.vmsproject.dto.response.ApiResponse;
 import org.example.vmsproject.dto.response.UserResponse;
 import org.example.vmsproject.entity.User;
-import org.example.vmsproject.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;

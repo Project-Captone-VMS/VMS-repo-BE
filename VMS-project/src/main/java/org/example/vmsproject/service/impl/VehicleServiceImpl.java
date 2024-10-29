@@ -1,17 +1,16 @@
-package org.example.vmsproject.service.Implement;
+package org.example.vmsproject.service.impl;
 
 import org.example.vmsproject.dto.VehicleDTO;
 import org.example.vmsproject.entity.Vehicle;
 import org.example.vmsproject.repository.VehicleRepository;
-
-import org.example.vmsproject.service.IVehicleService;
+import org.example.vmsproject.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class VehicleService implements IVehicleService {
+public class VehicleServiceImpl implements VehicleService {
     @Autowired
     private VehicleRepository vehicleRepository;
 

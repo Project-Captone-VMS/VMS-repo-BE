@@ -6,7 +6,7 @@ import org.example.vmsproject.entity.Driver;
 import java.util.List;
 import java.util.Optional;
 
-public interface IDriverService {
+public interface DriverService {
     List<Driver> getAllDrivers();
     Optional<Driver> getDriverById(long id);
     String updateDriver(long id, DriverDTO driver);

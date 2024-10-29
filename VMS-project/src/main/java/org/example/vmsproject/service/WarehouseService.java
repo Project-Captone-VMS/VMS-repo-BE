@@ -5,7 +5,7 @@ import org.example.vmsproject.entity.Warehouse;
 
 import java.util.List;
 
-public interface IWarehouseService {
+public interface WarehouseService {
     List<Warehouse> getAllWarehouses();
     Warehouse getWarehouseById(long  id);
     String addWarehouse(WarehouseDTO warehouse);

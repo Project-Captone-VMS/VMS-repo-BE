@@ -5,7 +5,7 @@ import org.example.vmsproject.entity.Vehicle;
 
 import java.util.List;
 
-public interface IVehicleService {
+public interface VehicleService {
     List<Vehicle> getAllVehicles();
     Vehicle getVehicleById(long id);
     String updateVehicle(long id, VehicleDTO vehicle);

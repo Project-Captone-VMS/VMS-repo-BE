@@ -1,9 +1,9 @@
-package org.example.vmsproject.service.Implement;
+package org.example.vmsproject.service.impl;
 
 import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.repository.DriverRepository;
-import org.example.vmsproject.service.IDriverService;
+import org.example.vmsproject.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DriverService implements IDriverService {
+public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private DriverRepository driverRepository;

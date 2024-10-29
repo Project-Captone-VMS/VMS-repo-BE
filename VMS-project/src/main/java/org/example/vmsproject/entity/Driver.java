@@ -2,6 +2,7 @@ package org.example.vmsproject.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "driver")
+@Builder
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,8 @@ public class Driver {
     private String licenseNumber;
     private String workSchedule;
     private String status;
+    private String email;
+    private String phoneNumber;
     private Boolean isDeleted = false;
     private LocalDateTime deleteAt;
 
