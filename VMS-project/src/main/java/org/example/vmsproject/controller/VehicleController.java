@@ -3,7 +3,7 @@ package org.example.vmsproject.controller;
 import jakarta.validation.Valid;
 import org.example.vmsproject.dto.VehicleDTO;
 import org.example.vmsproject.entity.Vehicle;
-import org.example.vmsproject.service.Implement.VehicleService;
+import org.example.vmsproject.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

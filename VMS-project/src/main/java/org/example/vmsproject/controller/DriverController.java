@@ -4,7 +4,8 @@ import jakarta.validation.Valid;
 import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.entity.Driver;
 
-import org.example.vmsproject.service.IDriverService;
+
+import org.example.vmsproject.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class DriverController {
 
     @Autowired
-    private IDriverService driverService;
+    private DriverService driverService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Driver>> getAllDrivers() {

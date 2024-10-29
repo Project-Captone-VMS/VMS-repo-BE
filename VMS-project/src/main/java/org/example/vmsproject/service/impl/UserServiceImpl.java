@@ -16,6 +16,7 @@ import org.example.vmsproject.mapper.UserMapper;
 import org.example.vmsproject.repository.DriverRepository;
 import org.example.vmsproject.repository.RoleRepository;
 import org.example.vmsproject.repository.UserRepository;
+import org.example.vmsproject.service.UserService;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;

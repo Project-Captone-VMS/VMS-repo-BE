@@ -3,7 +3,7 @@ package org.example.vmsproject.controller;
 import jakarta.validation.Valid;
 import org.example.vmsproject.dto.WarehouseDTO;
 import org.example.vmsproject.entity.Warehouse;
-import org.example.vmsproject.service.Implement.WarehouseService;
+import org.example.vmsproject.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
