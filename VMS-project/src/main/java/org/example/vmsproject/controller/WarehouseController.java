@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/warehouse")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class WarehouseController {
     @Autowired
     private WarehouseService warehouseService;

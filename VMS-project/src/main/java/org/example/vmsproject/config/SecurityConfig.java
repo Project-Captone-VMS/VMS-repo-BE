@@ -21,7 +21,7 @@ public class SecurityConfig {
     private CustomJwtDecoder customJwtDecoder;
 
     private final String[] PUBLIC_ENDPOINTS = {
-            "/api/auth/token", "/api/auth/introspect", "/api/auth/logout",  "/api/user/create"
+                "/api/auth/token", "/api/auth/introspect", "/api/auth/logout",  "/api/user/create", "/api/vehicle/all"
     };
 
 //    @Value("${jwt.signerKey}")
@@ -31,8 +31,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
                 request.requestMatchers(PUBLIC_ENDPOINTS).permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/user/*")
-//                        .hasRole(ERole.ADMIN.name())
+//                        .requestMatchers( "/api/vehicle/add")
+//                        .hasRole("ROLE_USER")
                         .anyRequest().authenticated());
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 //        oauth2.jwt(jwtConfigurer -> jwtConfigurer.jwkSetUri()) đăng nhập từ bên ngoài
