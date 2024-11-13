@@ -19,7 +19,7 @@ public class Product {
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "warsehose_id")
+    @JoinColumn(name = "warsehouse_id")
     private Warehouse warehouse;
 }
 

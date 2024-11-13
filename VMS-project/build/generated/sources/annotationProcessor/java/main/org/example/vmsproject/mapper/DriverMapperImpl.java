@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-29T13:08:00+0700",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
+    date = "2024-11-01T16:33:16+0700",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 @Component
 public class DriverMapperImpl implements DriverMapper {
@@ -27,12 +27,13 @@ public class DriverMapperImpl implements DriverMapper {
 
         Driver.DriverBuilder driver = Driver.builder();
 
-        driver.driverId( request.getDriverId() );
         driver.firstName( request.getFirstName() );
         driver.lastName( request.getLastName() );
         driver.licenseNumber( request.getLicenseNumber() );
         driver.workSchedule( request.getWorkSchedule() );
         driver.status( request.getStatus() );
+        driver.email( request.getEmail() );
+        driver.phoneNumber( request.getPhoneNumber() );
         driver.isDeleted( request.getIsDeleted() );
         driver.deleteAt( request.getDeleteAt() );
 
@@ -56,6 +57,8 @@ public class DriverMapperImpl implements DriverMapper {
         if ( set != null ) {
             userResponse.roles( new LinkedHashSet<Role>( set ) );
         }
+        userResponse.firstName( user.getFirstName() );
+        userResponse.lastName( user.getLastName() );
 
         return userResponse.build();
     }

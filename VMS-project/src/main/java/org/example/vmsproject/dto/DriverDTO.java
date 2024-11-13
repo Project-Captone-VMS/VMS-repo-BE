@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverDTO {
-    private Long driverId;
     @NotBlank(message = "First name is required")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contain only letters")
@@ -31,6 +30,9 @@ public class DriverDTO {
 
     @NotBlank(message = "Status is required.")
     private String status;
+
+    private String email;
+    private String phoneNumber;
     private Boolean isDeleted;
     private LocalDateTime deleteAt;
 }

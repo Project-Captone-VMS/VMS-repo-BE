@@ -1,6 +1,7 @@
 package org.example.vmsproject.service.impl;
 
 import org.example.vmsproject.dto.DriverDTO;
+import org.example.vmsproject.dto.response.DriverResponse;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.repository.DriverRepository;
 import org.example.vmsproject.service.DriverService;
@@ -35,6 +36,8 @@ public class DriverServiceImpl implements DriverService {
             driver.setLicenseNumber(driverDTO.getLicenseNumber());
             driver.setWorkSchedule(driverDTO.getWorkSchedule());
             driver.setStatus(driverDTO.getStatus());
+            driver.setEmail(driverDTO.getEmail());
+            driver.setPhoneNumber(driverDTO.getPhoneNumber());
             driverRepository.save(driver);
             return "Driver updated successfully.";
         } else {

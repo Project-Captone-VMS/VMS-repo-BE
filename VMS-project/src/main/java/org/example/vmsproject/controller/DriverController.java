@@ -2,10 +2,12 @@ package org.example.vmsproject.controller;
 
 import jakarta.validation.Valid;
 import org.example.vmsproject.dto.DriverDTO;
+import org.example.vmsproject.dto.response.DriverResponse;
 import org.example.vmsproject.entity.Driver;
 
 
 import org.example.vmsproject.service.DriverService;
+import org.example.vmsproject.service.impl.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/driver")
 public class DriverController {
 
     @Autowired
-    private DriverService driverService;
+    private DriverServiceImpl driverService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Driver>> getAllDrivers() {

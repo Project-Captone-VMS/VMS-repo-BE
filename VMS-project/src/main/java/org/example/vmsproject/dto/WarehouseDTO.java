@@ -21,4 +21,7 @@ public class WarehouseDTO {
 
     @Min(value = 0, message = "Current stock must be at least 0")
     private int currentStock;
+
+    @NotBlank(message = "Location cannot be blank")
+    private String warehouseName;
 }
