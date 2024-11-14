@@ -23,6 +23,12 @@ public class WarehouseController {
         return ResponseEntity.ok(warehouses);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Warehouse> getWarehouseById(@PathVariable("id") Long id) {
+        Warehouse warehouse = warehouseService.getWarehouseById(id);
+        return ResponseEntity.ok(warehouse);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<String> addWarehouse(@Valid @RequestBody WarehouseDTO warehouse) {
         String result = warehouseService.addWarehouse(warehouse);
