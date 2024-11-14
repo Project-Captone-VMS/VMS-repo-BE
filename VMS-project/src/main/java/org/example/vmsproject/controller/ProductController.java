@@ -18,9 +18,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.getAllProducts();
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<Product>> getAllProducts(@PathVariable("id") long id) {
+        List<Product> products = productService.getAllProducts(id);
         return ResponseEntity.ok(products);
     }
 

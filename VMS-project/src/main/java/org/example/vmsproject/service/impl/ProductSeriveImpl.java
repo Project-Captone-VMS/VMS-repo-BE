@@ -13,8 +13,8 @@ public class ProductSeriveImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<Product> getAllProducts(Long warehouseId) {
+        return productRepository.findAllByWarehouseId(warehouseId);
     }
 
     @Override
@@ -50,4 +50,6 @@ public class ProductSeriveImpl implements ProductService {
         productRepository.deleteById(id);
         return "Product deleted successfully";
     }
+
+
 }

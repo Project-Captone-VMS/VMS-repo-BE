@@ -53,4 +53,5 @@ public class WarehouseServiceImpl implements WarehouseService {
     public Warehouse getWarehouseById(long id) {
         return warehouseRepository.findById(id).orElse(null);
     }
+
 }
