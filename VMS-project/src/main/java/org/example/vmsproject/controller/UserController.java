@@ -18,13 +18,12 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/user")
 @Slf4j
 public class UserController {
     UserService userService;
-
 
 
     @PostMapping("/create")
@@ -44,12 +43,10 @@ public class UserController {
 //    }
 
 
-
-
     @GetMapping("/list")
-   ApiResponse<List<UserResponse>> findAllUser() {
+    ApiResponse<List<UserResponse>> findAllUser() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("username: {}",authentication.getName());
+        log.info("username: {}", authentication.getName());
         authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
         return ApiResponse.<List<UserResponse>>builder()
                 .result(userService.findAllUser())
@@ -64,7 +61,7 @@ public class UserController {
 
     @GetMapping("myInfo")
     ApiResponse<UserResponse> getMyInfo() {
-        return  ApiResponse.<UserResponse>builder()
+        return ApiResponse.<UserResponse>builder()
                 .result(userService.getMyInfo())
                 .build();
     }
@@ -74,6 +71,15 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable String userId, @RequestBody UpdateUserRequest request) {
         userService.updateUser(userId, request);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<ApiResponse<UserResponse>> getUserByUsername(@PathVariable String username) {
+        UserResponse userResponse = userService.getUserByUserName(username);
+        ApiResponse<UserResponse> response = ApiResponse.<UserResponse>builder()
+                .result(userResponse)
+                .build();
+        return ResponseEntity.ok(response);
     }
 
 }

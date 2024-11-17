@@ -54,9 +54,8 @@ public class UserServiceImpl implements UserService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .phoneNumber(request.getPhoneNumber())
                 .isDeleted(false)
-                .build();
+                .phoneNumber(request.getPhoneNumber()).build();
 
         driverRepository.save(driver);
 
@@ -106,4 +105,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
+    @Override
+    public UserResponse getUserByUserName(String userName) {
+        User user = userRepository.findByUsername(userName)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return userMapper.toUserResponse(user);
+    }
 }

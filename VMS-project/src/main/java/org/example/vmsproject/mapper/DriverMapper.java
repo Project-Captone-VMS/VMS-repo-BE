@@ -1,7 +1,6 @@
 package org.example.vmsproject.mapper;
 
 import org.example.vmsproject.dto.DriverDTO;
-import org.example.vmsproject.dto.request.CreateUserRequest;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
 import org.example.vmsproject.dto.response.UserResponse;
 import org.example.vmsproject.entity.Driver;

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-29T13:11:06+0700",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
+    date = "2024-11-17T18:00:51+0700",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -54,6 +54,8 @@ public class UserMapperImpl implements UserMapper {
         if ( set != null ) {
             userResponse.roles( new LinkedHashSet<Role>( set ) );
         }
+        userResponse.firstName( user.getFirstName() );
+        userResponse.lastName( user.getLastName() );
 
         return userResponse.build();
     }

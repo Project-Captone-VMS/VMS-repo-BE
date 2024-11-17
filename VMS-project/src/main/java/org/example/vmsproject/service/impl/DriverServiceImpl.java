@@ -35,6 +35,8 @@ public class DriverServiceImpl implements DriverService {
             driver.setLicenseNumber(driverDTO.getLicenseNumber());
             driver.setWorkSchedule(driverDTO.getWorkSchedule());
             driver.setStatus(driverDTO.getStatus());
+            driver.setEmail(driverDTO.getEmail());
+            driver.setPhoneNumber(driverDTO.getPhoneNumber());
             driverRepository.save(driver);
             return "Driver updated successfully.";
         } else {

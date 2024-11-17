@@ -17,6 +17,7 @@ public class Warehouse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long warehouseId;
     private String location;
+    private String warehouseName;
     private int capacity;
     private int currentStock;
 

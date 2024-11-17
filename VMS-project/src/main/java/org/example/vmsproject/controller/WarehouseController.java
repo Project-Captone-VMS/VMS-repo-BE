@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/warehouse")
-@CrossOrigin(origins = "*",maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 public class WarehouseController {
     @Autowired
     private WarehouseService warehouseService;
@@ -21,6 +21,12 @@ public class WarehouseController {
     public ResponseEntity<List<Warehouse>> getAllWarehouses() {
         List<Warehouse> warehouses = warehouseService.getAllWarehouses();
         return ResponseEntity.ok(warehouses);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Warehouse> getWarehouseById(@PathVariable("id") Long id) {
+        Warehouse warehouse = warehouseService.getWarehouseById(id);
+        return ResponseEntity.ok(warehouse);
     }
 
     @PostMapping("/add")

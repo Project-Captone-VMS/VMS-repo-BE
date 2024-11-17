@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 public class RoleController {
     RoleService roleService;
 

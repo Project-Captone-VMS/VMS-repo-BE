@@ -16,4 +16,5 @@ public interface UserService {
     UserResponse getUserDetail(String id);
     UserResponse updateUser(String userId, UpdateUserRequest request);
     UserResponse getMyInfo();
+    UserResponse getUserByUserName(String userName);
 }

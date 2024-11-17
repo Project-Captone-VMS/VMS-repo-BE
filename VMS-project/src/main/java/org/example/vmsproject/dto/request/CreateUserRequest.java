@@ -1,11 +1,7 @@
 package org.example.vmsproject.dto.request;
 
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.example.vmsproject.validator.DobConstraint;
-
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor

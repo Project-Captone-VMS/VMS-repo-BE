@@ -27,6 +27,7 @@ public class WarehouseServiceImpl implements WarehouseService {
             warehouseUpdate.setCapacity(warehouse.getCapacity());
             warehouseUpdate.setLocation(warehouse.getLocation());
             warehouseUpdate.setCurrentStock(warehouse.getCurrentStock());
+            warehouseUpdate.setWarehouseName(warehouse.getWarehouseName());
             warehouseRepository.save(warehouseUpdate);
             return "Warehouse updated successfully";
         }).orElse("Warehouse not found");
@@ -38,6 +39,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouseAdd.setCapacity(warehouse.getCapacity());
         warehouseAdd.setLocation(warehouse.getLocation());
         warehouseAdd.setCurrentStock(warehouse.getCurrentStock());
+        warehouseAdd.setWarehouseName(warehouse.getWarehouseName());
         warehouseRepository.save(warehouseAdd);
         return "Warehouse added successfully";
     }
@@ -51,4 +53,5 @@ public class WarehouseServiceImpl implements WarehouseService {
     public Warehouse getWarehouseById(long id) {
         return warehouseRepository.findById(id).orElse(null);
     }
+
 }
