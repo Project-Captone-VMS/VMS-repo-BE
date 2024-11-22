@@ -1,5 +1,7 @@
 package org.example.vmsproject.dto;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +18,6 @@ public class NotificationDTO {
     private String title;
     private boolean isRead = false;
     private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
     private ENotification type;
 }

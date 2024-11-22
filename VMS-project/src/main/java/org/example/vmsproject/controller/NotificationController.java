@@ -1,47 +1,49 @@
 package org.example.vmsproject.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.vmsproject.dto.NotificationDTO;
 import org.example.vmsproject.entity.ENotification;
+import org.example.vmsproject.entity.Notification;
 import org.example.vmsproject.entity.UserNotification;
 import org.example.vmsproject.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/notification")
+@RequestMapping("/api/notifications")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class NotificationController {
+    private final NotificationService notificationService;
+
     @Autowired
-    private NotificationService notificationService;
+    private SimpMessagingTemplate messagingTemplate;
 
-
-    @PostMapping("/send")
-    public ResponseEntity<String> sendNotification(@RequestBody NotificationDTO notificationDTO) {
+    @PostMapping("/send/{username}")
+    public ResponseEntity<String> createAndSendNotification(
+            @PathVariable String username,
+            @RequestBody NotificationDTO notificationDTO) {
         try {
-            if (notificationDTO == null || notificationDTO.getUsername() == null ||
-                    notificationDTO.getTitle() == null || notificationDTO.getContent() == null ||
-                    notificationDTO.getType() == null) {
-                return ResponseEntity.badRequest().body("Invalid request data");
-            }
-
-            notificationService.sendNotificationToUser(
-                    notificationDTO.getUsername(),
-                    notificationDTO
-            );
-            return ResponseEntity.ok("Notification sent successfully");
+            String message = notificationService.createAndSendNotification(username, notificationDTO);
+            return ResponseEntity.ok(message);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred while sending notification");
+            return ResponseEntity.status(400).body(e.getMessage());
         }
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<String> createNotification(@RequestBody NotificationDTO request) {
-        String results = notificationService.createNotification(request);
-        return ResponseEntity.ok(results);
+    @GetMapping("/{username}")
+    public ResponseEntity<List<UserNotification>> getNotificationsByUsername(@PathVariable String username) {
+        List<UserNotification> notifications = notificationService.getNotificationsByUsername(username);
+        if (notifications.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(notifications);
     }
 }
