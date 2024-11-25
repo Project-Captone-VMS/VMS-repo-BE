@@ -16,14 +16,24 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long routeId;
-    private String startLocation;
-    private String endLocation;
-    private int distance;
-    private String estimatedTime;
-    private String status;
+
+    private int totalDistance;
+    private int totalTime;
+    private String description;
+
+    // Thêm thông tin điểm bắt đầu
+    private double startLat;
+    private double startLng;
+
+    // Thêm thông tin điểm kết thúc
+    private double endLat;
+    private double endLng;
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
-    private List<Shipment> shipments;
+    private List<Waypoint> waypoints;
+
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    private List<Interconnection> interconnections;
 
     @OneToOne
     @JoinColumn(name = "vehicle_id")
@@ -32,5 +42,4 @@ public class Route {
     @OneToOne
     @JoinColumn(name = "driver_id")
     private Driver driver;
-
 }
