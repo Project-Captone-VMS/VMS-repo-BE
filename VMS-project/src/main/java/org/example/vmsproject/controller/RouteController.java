@@ -1,10 +1,14 @@
 package org.example.vmsproject.controller;
 
 import org.example.vmsproject.dto.request.FindSequenceRequest;
+import org.example.vmsproject.entity.Route;
 import org.example.vmsproject.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/route")
@@ -33,5 +37,16 @@ public class RouteController {
         String results = routeService.updateActiveRoute(id);
         return ResponseEntity.ok(results);
     }
+
+    @GetMapping("")
+    public List<Route> getAllRoutesNoActive() {
+        return routeService.getAllRouteNoActive();
+    }
+
+    @GetMapping("/done")
+    public List<Route> getAllRoutesActive() {
+        return routeService.getAllRouteActive();
+    }
+
 
 }

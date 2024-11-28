@@ -1,5 +1,6 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,9 +31,11 @@ public class Route {
     private double endLng;
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Waypoint> waypoints;
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Interconnection> interconnections;
 
     @ManyToOne

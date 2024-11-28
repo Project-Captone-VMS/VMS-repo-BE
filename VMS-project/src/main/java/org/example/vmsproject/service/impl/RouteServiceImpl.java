@@ -177,4 +177,14 @@ public class RouteServiceImpl implements RouteService {
             return "Update Active in Route Successfully";
         }).orElse("Update Not Active in Route Successfully");
     }
+
+    @Override
+    public List<Route> getAllRouteNoActive() {
+        return routeRepository.getAllRoutesByStatus();
+    }
+
+    @Override
+    public List<Route> getAllRouteActive() {
+        return routeRepository.getAllRoutesDone();
+    }
 }

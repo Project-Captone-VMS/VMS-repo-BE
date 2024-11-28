@@ -1,5 +1,7 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +25,7 @@ public class Interconnection {
     private double waiting;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "route_id")
     private Route route;
 }
