@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -20,8 +21,8 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public Vehicle getVehicleById(long id) {
-        return vehicleRepository.findById(id).orElse(null);
+    public Optional<Vehicle> getVehicleById(long id) {
+        return vehicleRepository.findById(id);
     }
 
     @Override

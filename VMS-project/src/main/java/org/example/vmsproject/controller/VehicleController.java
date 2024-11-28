@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vehicle")
@@ -25,9 +26,9 @@ public class VehicleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Vehicle> getVehicleById(@PathVariable("id") long id) {
-        Vehicle vehicle = vehicleService.getVehicleById(id);
+        Optional<Vehicle> vehicle = vehicleService.getVehicleById(id);
         if (vehicle != null) {
-            return ResponseEntity.ok(vehicle);
+            return ResponseEntity.ok(vehicle.get());
         } else {
             return ResponseEntity.notFound().build();
         }

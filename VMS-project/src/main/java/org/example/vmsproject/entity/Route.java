@@ -35,11 +35,13 @@ public class Route {
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
     private List<Interconnection> interconnections;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "driver_id")
     private Driver driver;
+
+    private Boolean status = Boolean.FALSE;
 }

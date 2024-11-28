@@ -68,4 +68,9 @@ public class NotificationServiceImpl implements NotificationService {
     public List<UserNotification> getNotificationsByUsername(String username) {
         return userNotificationRepository.findByUserUsername(username);
     }
+
+    @Override
+    public List<UserNotification>getAllNotifications() {
+        return userNotificationRepository.findAll();
+    }
 }

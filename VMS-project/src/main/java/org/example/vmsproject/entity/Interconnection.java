@@ -15,8 +15,8 @@ public class Interconnection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long interconnectionId;
 
-    private Long fromWaypoint;
-    private Long toWaypoint;
+    private String fromWaypoint;
+    private String toWaypoint;
     private double distance;
     private double time;
     private double rest;

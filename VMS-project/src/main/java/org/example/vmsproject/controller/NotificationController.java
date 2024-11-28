@@ -46,4 +46,10 @@ public class NotificationController {
         }
         return ResponseEntity.ok(notifications);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserNotification>> getAllNotifications() {
+        List<UserNotification> notifications = notificationService.getAllNotifications();
+        return ResponseEntity.ok(notifications);
+    }
 }
