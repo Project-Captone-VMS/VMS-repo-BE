@@ -28,4 +28,10 @@ public class RouteController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateActive(@PathVariable("id") Long id) {
+        String results = routeService.updateActiveRoute(id);
+        return ResponseEntity.ok(results);
+    }
+
 }

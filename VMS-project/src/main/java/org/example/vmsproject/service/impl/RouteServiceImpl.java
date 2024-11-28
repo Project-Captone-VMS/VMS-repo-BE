@@ -168,4 +168,13 @@ public class RouteServiceImpl implements RouteService {
     public String getRoute(double startLat, double startLng, double endLat, double endLng) {
         return "";
     }
+
+    @Override
+    public String updateActiveRoute(long routeId) {
+        return routeRepository.findById(routeId).map(route -> {
+            route.setStatus(true);
+            routeRepository.save(route);
+            return "Update Active in Route Successfully";
+        }).orElse("Update Not Active in Route Successfully");
+    }
 }
