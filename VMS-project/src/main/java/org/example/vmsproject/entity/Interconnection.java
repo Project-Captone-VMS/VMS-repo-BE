@@ -20,9 +20,9 @@ public class Interconnection {
     private String fromWaypoint;
     private String toWaypoint;
     private double distance;
-    private double time;
-    private double rest;
-    private double waiting;
+    private double timeWaypoint;
+    private double timeEstimate;
+    private double timeActual;
 
     @ManyToOne
     @JsonManagedReference

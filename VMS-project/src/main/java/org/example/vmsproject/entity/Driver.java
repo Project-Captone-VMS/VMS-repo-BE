@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 public class Driver {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long driverId;
     private String firstName;
     private String lastName;

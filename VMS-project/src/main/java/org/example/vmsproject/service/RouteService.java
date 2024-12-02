@@ -11,4 +11,5 @@ public interface RouteService {
     public String updateActiveRoute(long routeId);
     List<Route> getAllRouteNoActive();
     List<Route> getAllRouteActive();
+    List<Route> getRouteByUserName(String username);
 }

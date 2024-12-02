@@ -48,5 +48,10 @@ public class RouteController {
         return routeService.getAllRouteActive();
     }
 
+    @GetMapping("/user/{username}")
+    public List<Route> getAllRoutesActiveByUsername(@PathVariable("username") String username) {
+        return routeService.getRouteByUserName(username);
+    }
+
 
 }

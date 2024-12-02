@@ -104,6 +104,8 @@ public class RouteServiceImpl implements RouteService {
         }
     }
 
+
+
     private void creatRoute(String jsonRespone, Long vehicleId, Long driverId) throws JsonProcessingException {
         // Parse JSON thành đối tượng Java
         ObjectMapper mapper = new ObjectMapper();
@@ -155,7 +157,7 @@ public class RouteServiceImpl implements RouteService {
                 interconnectionEntity.setFromWaypoint(interconnection.getFromWaypoint());
                 interconnectionEntity.setToWaypoint(interconnection.getToWaypoint());
                 interconnectionEntity.setDistance(interconnection.getDistance());
-                interconnectionEntity.setTime(interconnection.getTime());
+                interconnectionEntity.setTimeWaypoint(interconnection.getTime());
                 interconnectionEntity.setRoute(savedRoute);
 
                 interconnectionEntities.add(interconnectionEntity);
@@ -186,5 +188,10 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public List<Route> getAllRouteActive() {
         return routeRepository.getAllRoutesDone();
+    }
+
+    @Override
+    public List<Route> getRouteByUserName(String username) {
+        return routeRepository.findRoutesByUsername(username);
     }
 }
