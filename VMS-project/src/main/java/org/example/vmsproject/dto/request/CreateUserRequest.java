@@ -1,5 +1,6 @@
 package org.example.vmsproject.dto.request;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -9,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateUserRequest {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 //    @Size(min = 5, message = "USERNAME_INVALID")
     String username;
