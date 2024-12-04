@@ -26,8 +26,6 @@ public class VehicleDTO {
     @Positive(message = "Capacity must be a positive number.")
     private int capacity;
 
-    @NotBlank(message = "Status is required.")
-    private String status;
 
     @FutureOrPresent(message = "Maintenance schedule must be today or in the future.")
     private LocalDate maintenanceSchedule;

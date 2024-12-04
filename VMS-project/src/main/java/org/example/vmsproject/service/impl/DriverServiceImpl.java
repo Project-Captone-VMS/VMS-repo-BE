@@ -34,7 +34,6 @@ public class DriverServiceImpl implements DriverService {
             Driver driver = optionalDriver.get();
             driver.setLicenseNumber(driverDTO.getLicenseNumber());
             driver.setWorkSchedule(driverDTO.getWorkSchedule());
-            driver.setStatus(driverDTO.getStatus());
             driver.setEmail(driverDTO.getEmail());
             driver.setPhoneNumber(driverDTO.getPhoneNumber());
             driverRepository.save(driver);
@@ -61,5 +60,10 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public String findUserNameById(long id) {
         return driverRepository.findUserNameById(id);
+    }
+
+    @Override
+    public List<Driver> getAllDriversNoActive() {
+        return driverRepository.findAllNoActive();
     }
 }

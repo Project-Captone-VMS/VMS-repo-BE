@@ -48,4 +48,10 @@ public class DriverController {
         String result = driverService.findUserNameById(id);
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/No-Active")
+    public ResponseEntity<List<Driver>> getNoActiveDrivers() {
+        List<Driver> drivers = driverService.getAllDriversNoActive();
+        return ResponseEntity.ok(drivers);
+    }
 }

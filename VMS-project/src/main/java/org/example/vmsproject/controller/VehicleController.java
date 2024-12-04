@@ -51,4 +51,10 @@ public class VehicleController {
         String result = vehicleService.deleteVehicle(id);
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/No-Active")
+    public ResponseEntity<List<Vehicle>> getNoActiveDrivers() {
+        List<Vehicle> vehicle = vehicleService.getAllVehiclesNoActive();
+        return ResponseEntity.ok(vehicle);
+    }
 }

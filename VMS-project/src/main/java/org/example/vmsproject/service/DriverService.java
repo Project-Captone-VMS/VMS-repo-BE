@@ -12,4 +12,5 @@ public interface DriverService {
     String updateDriver(long id, DriverDTO driver);
     String softDeleteDriver(long id);
     String findUserNameById(long id);
+    List<Driver> getAllDriversNoActive();
 }

@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .isDeleted(false)
+                .status(false)
                 .phoneNumber(request.getPhoneNumber()).build();
 
         driverRepository.save(driver);

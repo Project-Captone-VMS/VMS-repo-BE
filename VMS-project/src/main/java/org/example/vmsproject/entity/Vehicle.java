@@ -20,7 +20,7 @@ public class Vehicle {
     private String licensePlate;
     private String type;
     private int capacity;
-    private String status;
+    private Boolean status = false;
     private LocalDate maintenanceSchedule;
 
 

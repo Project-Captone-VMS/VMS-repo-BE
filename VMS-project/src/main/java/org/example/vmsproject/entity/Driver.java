@@ -23,7 +23,7 @@ public class Driver {
     private String lastName;
     private String licenseNumber;
     private String workSchedule;
-    private String status;
+    private Boolean status = false;
     private String email;
     private String phoneNumber;
     private Boolean isDeleted = false;

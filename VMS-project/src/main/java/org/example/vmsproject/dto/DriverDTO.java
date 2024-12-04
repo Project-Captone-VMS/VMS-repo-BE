@@ -31,7 +31,7 @@ public class DriverDTO {
     private String workSchedule;
 
     @NotBlank(message = "Status is required.")
-    private String status;
+    private Boolean status = false;
 
     private String email;
     private String phoneNumber;

@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.vmsproject.dto.response.ApiRouteResponse;
 import org.example.vmsproject.entity.*;
-import org.example.vmsproject.repository.InterconnectionRepository;
-import org.example.vmsproject.repository.RouteRepository;
-import org.example.vmsproject.repository.WaypointRepository;
+import org.example.vmsproject.repository.*;
 import org.example.vmsproject.service.DriverService;
 import org.example.vmsproject.service.RouteService;
 import org.example.vmsproject.service.VehicleService;
@@ -48,6 +46,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Value("${here.api.key}")
     private String apiKey;
+
 
     @Override
     public String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId) {
@@ -127,6 +126,7 @@ public class RouteServiceImpl implements RouteService {
             route.setEndLat(waypoints.get(waypoints.size() - 1).getLat());
             route.setEndLng(waypoints.get(waypoints.size() - 1).getLng());
 
+
             Optional<Driver> driver = driverService.getDriverById(driverId);
             Optional<Vehicle> vehicle = vehicleService.getVehicleById(vehicleId);
 
@@ -134,8 +134,11 @@ public class RouteServiceImpl implements RouteService {
             if(driver.isPresent() && vehicle.isPresent()) {
                 route.setDriver(driver.get());
                 route.setVehicle(vehicle.get());
+                driver.get().setStatus(true);
+                vehicle.get().setStatus(true);
             }
             Route savedRoute = routeRepository.save(route);
+
 
             //Lưu chi tiết waypoints
             List<Waypoint> waypointsEntities = new ArrayList<>();
@@ -186,6 +189,8 @@ public class RouteServiceImpl implements RouteService {
     public String updateActiveRoute(long routeId) {
         return routeRepository.findById(routeId).map(route -> {
             route.setStatus(true);
+            route.getDriver().setStatus(false);
+            route.getVehicle().setStatus(false);
             routeRepository.save(route);
             return "Update Active in Route Successfully";
         }).orElse("Update Not Active in Route Successfully");

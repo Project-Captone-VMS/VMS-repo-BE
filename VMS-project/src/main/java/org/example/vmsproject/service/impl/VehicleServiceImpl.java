@@ -31,7 +31,6 @@ public class VehicleServiceImpl implements VehicleService {
             vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
             vehicle.setType(vehicleDTO.getType());
             vehicle.setCapacity(vehicleDTO.getCapacity());
-            vehicle.setStatus(vehicleDTO.getStatus());
             vehicle.setMaintenanceSchedule(vehicleDTO.getMaintenanceSchedule());
             vehicleRepository.save(vehicle);
             return "Vehicle updated successfully!";
@@ -44,7 +43,7 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
         vehicle.setType(vehicleDTO.getType());
         vehicle.setCapacity(vehicleDTO.getCapacity());
-        vehicle.setStatus(vehicleDTO.getStatus());
+        vehicle.setStatus(false);
         vehicle.setMaintenanceSchedule(vehicleDTO.getMaintenanceSchedule());
         vehicleRepository.save(vehicle);
         return "Vehicle added successfully!";
@@ -54,5 +53,10 @@ public class VehicleServiceImpl implements VehicleService {
     public String deleteVehicle(long id) {
         vehicleRepository.deleteById(id);
         return "Vehicle deleted successfully!";
+    }
+
+    @Override
+    public List<Vehicle> getAllVehiclesNoActive() {
+        return vehicleRepository.findAllVehicleNoActive();
     }
 }

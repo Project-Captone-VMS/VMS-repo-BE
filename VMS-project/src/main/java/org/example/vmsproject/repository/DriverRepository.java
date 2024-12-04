@@ -13,4 +13,7 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 
     @Query("select u.username from User u join Driver d on d.email = u.email where d.driverId = :driverId ")
     String findUserNameById(@Param("driverId")Long driverId);
+
+    @Query("SELECT d FROM Driver d WHERE d.isDeleted = false and d.status = false ")
+    List<Driver> findAllNoActive();
 }
