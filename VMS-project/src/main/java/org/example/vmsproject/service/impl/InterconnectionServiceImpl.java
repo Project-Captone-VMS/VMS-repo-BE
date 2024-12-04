@@ -7,6 +7,8 @@ import org.example.vmsproject.service.InterconnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InterconnectionServiceImpl implements InterconnectionService {
     @Autowired
@@ -18,5 +20,10 @@ public class InterconnectionServiceImpl implements InterconnectionService {
         interconnection.setTimeEstimate(interconnectionDTO.getTimeEstimate());
         interconnectionRepository.save(interconnection);
         return "Updated Time Estimate By Driver Successfully ";
+    }
+
+    @Override
+    public List<Interconnection> getInterconnectionByRouteId(Long routeId) {
+        return interconnectionRepository.findByRouteId(routeId);
     }
 }
