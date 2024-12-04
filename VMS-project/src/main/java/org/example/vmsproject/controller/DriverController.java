@@ -42,4 +42,10 @@ public class DriverController {
         String result = driverService.softDeleteDriver(id);
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/findUsername/{id}")
+    public ResponseEntity<String> getUserNameById(@PathVariable("id") long id) {
+        String result = driverService.findUserNameById(id);
+        return ResponseEntity.ok(result);
+    }
 }

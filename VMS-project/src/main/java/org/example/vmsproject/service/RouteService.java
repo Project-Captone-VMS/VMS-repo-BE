@@ -3,6 +3,7 @@ package org.example.vmsproject.service;
 import org.example.vmsproject.entity.Route;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface RouteService {
@@ -12,4 +13,5 @@ public interface RouteService {
     List<Route> getAllRouteNoActive();
     List<Route> getAllRouteActive();
     List<Route> getRouteByUserName(String username);
+    public Map<String, Object> getSearchSuggestions(String query, double latitude, double longitude);
 }

@@ -16,11 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -168,7 +170,16 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public String getRoute(double startLat, double startLng, double endLat, double endLng) {
-        return "";
+        URI url = UriComponentsBuilder.fromHttpUrl("https://router.hereapi.com/v8/routes")
+                .queryParam("transportMode", "car")
+                .queryParam("origin", startLat + "," + startLng)
+                .queryParam("destination", endLat + "," + endLng)
+                .queryParam("return", "summary,actions,polyline")
+                .queryParam("apiKey", apiKey)
+                .build()
+                .toUri();
+
+        return restTemplate.getForObject(url, String.class);
     }
 
     @Override
@@ -193,5 +204,18 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public List<Route> getRouteByUserName(String username) {
         return routeRepository.findRoutesByUsername(username);
+    }
+
+    @Override
+    public Map<String, Object> getSearchSuggestions(String query, double latitude, double longitude) {
+        String url = UriComponentsBuilder.fromHttpUrl("https://autosuggest.search.hereapi.com/v1/autosuggest")
+                .queryParam("at", latitude + "," + longitude)
+                .queryParam("lang", "vi-VN")
+                .queryParam("limit", 5)
+                .queryParam("q", query)
+                .queryParam("apiKey", apiKey)
+                .queryParam("country", "VN")
+                .toUriString();
+        return restTemplate.getForObject(url, Map.class);
     }
 }

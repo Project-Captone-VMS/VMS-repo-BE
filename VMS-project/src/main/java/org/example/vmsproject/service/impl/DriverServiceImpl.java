@@ -57,4 +57,9 @@ public class DriverServiceImpl implements DriverService {
             return "Driver not found.";
         }
     }
+
+    @Override
+    public String findUserNameById(long id) {
+        return driverRepository.findUserNameById(id);
+    }
 }

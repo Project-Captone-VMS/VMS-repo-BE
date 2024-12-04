@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -16,6 +17,15 @@ import java.util.Optional;
 public class RouteController {
     @Autowired
     private RouteService routeService;
+
+    @GetMapping("/findRoute")
+    public String getRoute(
+            @RequestParam double originLat,
+            @RequestParam double originLng,
+            @RequestParam double destinationLat,
+            @RequestParam double destinationLng){
+        return routeService.getRoute(originLat, originLng, destinationLat, destinationLng);
+    }
 
     @PostMapping("/find-sequence")
     public ResponseEntity<?> findSequence(@RequestBody FindSequenceRequest request) {
@@ -52,6 +62,12 @@ public class RouteController {
     public List<Route> getAllRoutesActiveByUsername(@PathVariable("username") String username) {
         return routeService.getRouteByUserName(username);
     }
-
+    @GetMapping("/search-suggestions")
+    public Map<String, Object> getSearchSuggestions(
+            @RequestParam("query") String query,
+            @RequestParam("lat") double latitude,
+            @RequestParam("lng") double longitude) {
+        return routeService.getSearchSuggestions(query, latitude, longitude);
+    }
 
 }
