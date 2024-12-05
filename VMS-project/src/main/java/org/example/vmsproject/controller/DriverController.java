@@ -1,6 +1,9 @@
 package org.example.vmsproject.controller;
 
 import jakarta.validation.Valid;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.entity.Driver;
 
@@ -15,11 +18,17 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping("/api/driver")
 public class DriverController {
 
+<<<<<<< Updated upstream
     @Autowired
     private DriverService driverService;
+=======
+    DriverServiceImpl driverService;
+>>>>>>> Stashed changes
 
     @GetMapping("/all")
     public ResponseEntity<List<Driver>> getAllDrivers() {

@@ -52,6 +52,7 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.Build VMS-project.executor": "Run",
@@ -67,6 +68,23 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build VMS-project.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.VmsProjectApplication.executor&quot;: &quot;Run&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/.Project_Capston/merge_v1/VMS-repo-BE/VMS-project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+>>>>>>> Stashed changes
   }
 }]]></component>
   <component name="RecentsManager">
@@ -75,6 +93,9 @@
       <recent name="E:\.Project_Capston\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.vmsproject.repository" />
+      <recent name="org.example.vmsproject.entity" />
+      <recent name="org.example.vmsproject.dto" />
       <recent name="org.example.vmsproject.mapper" />
     </key>
   </component>
@@ -140,6 +161,17 @@
       <workItem from="1730731197493" duration="137000" />
       <workItem from="1731567936475" duration="1128000" />
       <workItem from="1731598501191" duration="67000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1731604975942" duration="173000" />
+      <workItem from="1731605170501" duration="458000" />
+      <workItem from="1731824660754" duration="35000" />
+      <workItem from="1733294052952" duration="477000" />
+      <workItem from="1733294596585" duration="8000" />
+      <workItem from="1733294691398" duration="5506000" />
+      <workItem from="1733380387078" duration="1887000" />
+      <workItem from="1733411825457" duration="613000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
