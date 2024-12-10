@@ -39,4 +39,9 @@ public class InterconnectionServiceImpl implements InterconnectionService {
         }
         return "Updated Time Actual By Driver Successfully ";
     }
+
+    @Override
+    public Optional<Interconnection> getInterconnection(Long interId) {
+        return interconnectionRepository.findById(interId);
+    }
 }

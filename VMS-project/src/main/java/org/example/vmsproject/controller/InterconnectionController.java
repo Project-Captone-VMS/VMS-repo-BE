@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -31,5 +32,10 @@ public class InterconnectionController {
     public ResponseEntity<String> updateTimeActual(@PathVariable Long routeId, @RequestBody InterconnectionDTO interconnection) {
         String results = interconnectionService.updateTimeActualByDriver(routeId, interconnection);
         return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Interconnection> getInterconnections(@PathVariable Long id) {
+        return interconnectionService.getInterconnection(id);
     }
 }
