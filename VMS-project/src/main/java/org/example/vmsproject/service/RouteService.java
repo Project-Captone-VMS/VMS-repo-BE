@@ -14,4 +14,5 @@ public interface RouteService {
     List<Route> getAllRouteActive();
     List<Route> getRouteByUserName(String username);
     public Map<String, Object> getSearchSuggestions(String query, double latitude, double longitude);
+    Optional<Route> getRouteByRouteId(long routeId);
 }

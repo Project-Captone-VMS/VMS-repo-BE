@@ -223,4 +223,9 @@ public class RouteServiceImpl implements RouteService {
                 .toUriString();
         return restTemplate.getForObject(url, Map.class);
     }
+
+    @Override
+    public Optional<Route> getRouteByRouteId(long routeId) {
+        return routeRepository.findById(routeId);
+    }
 }

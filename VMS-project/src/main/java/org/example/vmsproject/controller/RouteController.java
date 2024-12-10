@@ -58,7 +58,7 @@ public class RouteController {
         return routeService.getAllRouteActive();
     }
 
-        @GetMapping("/user/{username}")
+    @GetMapping("/user/{username}")
     public List<Route> getAllRoutesActiveByUsername(@PathVariable("username") String username) {
         return routeService.getRouteByUserName(username);
     }
@@ -68,6 +68,11 @@ public class RouteController {
             @RequestParam("lat") double latitude,
             @RequestParam("lng") double longitude) {
         return routeService.getSearchSuggestions(query, latitude, longitude);
+    }
+
+    @GetMapping("/{routeId}")
+    public Optional<Route> getRouteById(@PathVariable("routeId") Long routeId) {
+        return routeService.getRouteByRouteId(routeId);
     }
 
 }
