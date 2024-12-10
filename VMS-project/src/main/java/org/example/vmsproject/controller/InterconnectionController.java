@@ -16,7 +16,7 @@ public class InterconnectionController {
     @Autowired
     private InterconnectionService interconnectionService;
 
-    @PutMapping("/update/{routeId}")
+    @PutMapping("/timeEstimate/{routeId}")
     public ResponseEntity<String> update(@PathVariable Long routeId, @RequestBody InterconnectionDTO interconnection) {
         String results = interconnectionService.updateTimeEstimateByDriver(routeId, interconnection);
         return ResponseEntity.ok(results);
@@ -25,5 +25,11 @@ public class InterconnectionController {
     @GetMapping("/route/{route_id}")
     public List<Interconnection> getByRouteId(@PathVariable("route_id")  Long routeId) {
         return interconnectionService.getInterconnectionByRouteId(routeId);
+    }
+
+    @PutMapping("/timeActual/{routeId}")
+    public ResponseEntity<String> updateTimeActual(@PathVariable Long routeId, @RequestBody InterconnectionDTO interconnection) {
+        String results = interconnectionService.updateTimeActualByDriver(routeId, interconnection);
+        return ResponseEntity.ok(results);
     }
 }

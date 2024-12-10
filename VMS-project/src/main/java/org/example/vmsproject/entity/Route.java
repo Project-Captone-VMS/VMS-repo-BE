@@ -30,12 +30,12 @@ public class Route {
     private double endLat;
     private double endLng;
 
-    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
-    @JsonBackReference
+    // Quan hệ với Waypoint
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Waypoint> waypoints;
 
-    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
-    @JsonBackReference
+    // Quan hệ với Interconnection
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Interconnection> interconnections;
 
     @ManyToOne
