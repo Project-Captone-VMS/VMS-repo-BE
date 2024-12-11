@@ -13,4 +13,10 @@ public interface DriverService {
     String softDeleteDriver(long id);
     String findUserNameById(long id);
     List<Driver> getAllDriversNoActive();
+
+    int totalDrivers();
+    int totalOnDeliverys();
+    int totalAvailables();
+    int totalWeeks();
+
 }

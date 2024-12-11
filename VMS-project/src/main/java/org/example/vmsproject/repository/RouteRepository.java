@@ -26,7 +26,16 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
             "FROM Route r " +
             "JOIN r.driver d " +
             "JOIN User u ON u.email = d.email " +
-            "WHERE u.username = :username")
+            "WHERE u.username = :username " +
+            "AND r.status = false")
     List<Route> findRoutesByUsername(@Param("username") String username);
+
+    @Query("SELECT r " +
+            "FROM Route r " +
+            "JOIN r.driver d " +
+            "JOIN User u ON u.email = d.email " +
+            "WHERE u.username = :username " +
+            "AND r.status = true")
+    List<Route> findRoutesByUsernameDone(@Param("username") String username);
 
 }

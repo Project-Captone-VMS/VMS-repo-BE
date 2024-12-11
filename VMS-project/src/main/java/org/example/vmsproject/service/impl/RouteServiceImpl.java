@@ -82,32 +82,41 @@ public class RouteServiceImpl implements RouteService {
         String jsonRespone = restTemplate.getForObject(url, String.class);
 
 
-        Optional<Route> existingRoute = routeRepository.findRouteByDriverAndVehicle(driverId, vehicleId);
-        if (existingRoute.isPresent()) {
-            if(existingRoute.get().getStatus()){
-                try {
-                    creatRoute(jsonRespone,existingRoute.get().getDriver().getDriverId(),existingRoute.get().getVehicle().getVehicleId());
-                    return "Create Route Successfully";
-                } catch (Exception e) {
-                    return "Create Route Failed In Set Status " + e.getMessage();
-                }
 
-            }else{
-                return "Route is not completed. Cannot create new.";
-            }
-        }else{
-            try {
-                creatRoute(jsonRespone,driverId,vehicleId);
-                return "Create Route Successfully";
-            } catch (Exception e) {
-                return "Create Route Failed " + e.getMessage();
-            }
+//        Optional<Route> existingRoute = routeRepository.findRouteByDriverAndVehicle(driverId, vehicleId);
+//        if (existingRoute.isPresent()) {
+//            if(existingRoute.get().getStatus()){
+//                try {
+//                    creatRoute(jsonRespone,existingRoute.get().getDriver().getDriverId(),existingRoute.get().getVehicle().getVehicleId());
+//                    return "Create Route Successfully";
+//                } catch (Exception e) {
+//                    return "Create Route Failed In Set Status " + e.getMessage();
+//                }
+//
+//            }else{
+//                return "Route is not completed. Cannot create new.";
+//            }
+//        }else{
+//            try {
+//                creatRoute(jsonRespone,driverId,vehicleId);
+//                return "Create Route Successfully";
+//            } catch (Exception e) {
+//                return "Create Route Failed " + e.getMessage();
+//            }
+//        }
+
+        try {
+            creatRoute(jsonRespone,driverId,vehicleId);
+            return "Create Route Successfully";
+        } catch (Exception e) {
+            return "Create Route Failed " + e.getMessage();
         }
+
     }
 
 
 
-    private void creatRoute(String jsonRespone, Long vehicleId, Long driverId) throws JsonProcessingException {
+    private void creatRoute(String jsonRespone, Long driverId, Long vehicleId) throws JsonProcessingException {
         // Parse JSON thành đối tượng Java
         ObjectMapper mapper = new ObjectMapper();
         ApiRouteResponse apiRouteResponse = mapper.readValue(jsonRespone, ApiRouteResponse.class);
@@ -227,5 +236,10 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Optional<Route> getRouteByRouteId(long routeId) {
         return routeRepository.findById(routeId);
+    }
+
+    @Override
+    public List<Route> getRouteByUserNameDone(String username) {
+        return routeRepository.findRoutesByUsernameDone(username);
     }
 }

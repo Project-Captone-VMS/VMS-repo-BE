@@ -3,6 +3,7 @@ package org.example.vmsproject.controller;
 import jakarta.validation.Valid;
 import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.entity.Driver;
+import org.example.vmsproject.service.DriverService;
 import org.example.vmsproject.service.impl.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class DriverController {
 
     @Autowired
-    private DriverServiceImpl driverService;
+    private DriverService driverService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Driver>> getAllDrivers() {
@@ -53,5 +54,29 @@ public class DriverController {
     public ResponseEntity<List<Driver>> getNoActiveDrivers() {
         List<Driver> drivers = driverService.getAllDriversNoActive();
         return ResponseEntity.ok(drivers);
+    }
+
+    @GetMapping("/totalDriver")
+    public ResponseEntity<?> getTotalDriver() {
+        int result = driverService.totalDrivers();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/totalOndelivery")
+    public ResponseEntity<?> getTotalOndelivery() {
+        int result = driverService.totalOnDeliverys();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/totalAvailable")
+    public ResponseEntity<?> getTotalAvailable() {
+        int result = driverService.totalAvailables();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/totalWeek")
+    public ResponseEntity<?> getTotalWeek() {
+        int result = driverService.totalWeeks();
+        return ResponseEntity.ok(result);
     }
 }

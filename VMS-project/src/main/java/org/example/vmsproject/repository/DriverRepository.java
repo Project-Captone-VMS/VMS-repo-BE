@@ -16,4 +16,16 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 
     @Query("SELECT d FROM Driver d WHERE d.isDeleted = false and d.status = false ")
     List<Driver> findAllNoActive();
+
+    @Query("select count(*) as total_drivers From Driver d where d.isDeleted = false ")
+    int findTotalDrivers();
+
+    @Query("select count(d) from Driver d where d.isDeleted = false and d.status = true ")
+    int findTotalOnDeliverys();
+
+    @Query("select count(d) from Driver d where d.isDeleted = false and d.status = false ")
+    int findTotalAvailables();
+
+    @Query("select count(d) from Driver d where d.isDeleted = false and d.workSchedule = 'Monday-Friday'")
+    int findTotalWeeks();
 }

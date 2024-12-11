@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-04T11:12:51+0700",
+    date = "2024-12-11T10:26:17+0700",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 @Component
@@ -31,11 +31,8 @@ public class DriverMapperImpl implements DriverMapper {
         driver.lastName( request.getLastName() );
         driver.licenseNumber( request.getLicenseNumber() );
         driver.workSchedule( request.getWorkSchedule() );
-        driver.status( request.getStatus() );
         driver.email( request.getEmail() );
         driver.phoneNumber( request.getPhoneNumber() );
-        driver.isDeleted( request.getIsDeleted() );
-        driver.deleteAt( request.getDeleteAt() );
 
         return driver.build();
     }

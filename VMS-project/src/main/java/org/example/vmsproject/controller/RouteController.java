@@ -62,6 +62,11 @@ public class RouteController {
     public List<Route> getAllRoutesActiveByUsername(@PathVariable("username") String username) {
         return routeService.getRouteByUserName(username);
     }
+
+    @GetMapping("/userDone/{username}")
+    public List<Route> getAllRoutesActiveByUsernameDone(@PathVariable("username") String username) {
+        return routeService.getRouteByUserNameDone(username);
+    }
     @GetMapping("/search-suggestions")
     public Map<String, Object> getSearchSuggestions(
             @RequestParam("query") String query,

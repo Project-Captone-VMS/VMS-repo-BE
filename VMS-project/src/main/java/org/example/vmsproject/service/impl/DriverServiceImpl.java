@@ -66,4 +66,24 @@ public class DriverServiceImpl implements DriverService {
     public List<Driver> getAllDriversNoActive() {
         return driverRepository.findAllNoActive();
     }
+
+    @Override
+    public int totalDrivers() {
+        return driverRepository.findTotalDrivers();
+    }
+
+    @Override
+    public int totalOnDeliverys() {
+        return driverRepository.findTotalOnDeliverys();
+    }
+
+    @Override
+    public int totalAvailables() {
+        return driverRepository.findTotalAvailables();
+    }
+
+    @Override
+    public int totalWeeks() {
+        return driverRepository.findTotalWeeks();
+    }
 }

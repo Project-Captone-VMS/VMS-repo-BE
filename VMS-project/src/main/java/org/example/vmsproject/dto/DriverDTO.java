@@ -30,11 +30,9 @@ public class DriverDTO {
     @NotBlank(message = "Work schedule is required.")
     private String workSchedule;
 
-    @NotBlank(message = "Status is required.")
-    private Boolean status = false;
+//    @NotBlank(message = "Status is required.")
+//    private Boolean status = false;
 
     private String email;
     private String phoneNumber;
-    private Boolean isDeleted;
-    private LocalDateTime deleteAt;
 }
