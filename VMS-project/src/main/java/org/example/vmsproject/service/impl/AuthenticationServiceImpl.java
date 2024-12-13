@@ -59,12 +59,16 @@ public class AuthenticationServiceImpl {
     protected long REFRESHABLE_DURATION;
 
     public AuthenticationResponse authentication(AuthenticationRequest request) {
+        validateAuthenticationRequest(request);
+
         var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTS));
+
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         boolean authenticated = passwordEncoder.matches(request.getPassword(), user.getPassword());
-        if (!authenticated)
+        if (!authenticated) {
             throw new AppException(ErrorCode.UNAUTHENTICATED);
+        }
 
         var token = generateToken(user);
 
@@ -78,6 +82,8 @@ public class AuthenticationServiceImpl {
                 .authenticated(true)
                 .build();
     }
+
+
 
     public IntrospectionResponse introspect(IntrospectRequest request) throws JOSEException, ParseException {
         var token = request.getToken();
@@ -184,6 +190,22 @@ public class AuthenticationServiceImpl {
             });
 
         return stringJoiner.toString();
+    }
+
+    public static void validateAuthenticationRequest(AuthenticationRequest request) {
+        if (request.getUsername().length() < 4) {
+            throw new AppException(ErrorCode.USERNAME_MIN_INVALID);
+        }
+        if (request.getUsername().length() > 30) {
+            throw new AppException(ErrorCode.USERNAME_MAX_INVALID);
+        }
+
+        if (request.getPassword().length() < 4) {
+            throw new AppException(ErrorCode.PASSWORD_MIN_INVALID);
+        }
+        if (request.getPassword().length() > 30) {
+            throw new AppException(ErrorCode.PASSWORD_MAX_INVALID);
+        }
     }
 
 //    public AuthenticationResponse refeshToken(RefreshRequest request) throws ParseException, JOSEException {

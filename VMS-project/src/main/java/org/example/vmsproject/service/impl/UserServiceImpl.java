@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.example.vmsproject.dto.request.AuthenticationRequest;
 import org.example.vmsproject.dto.request.CreateUserRequest;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
 import org.example.vmsproject.dto.response.UserResponse;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
     DriverRepository driverRepository;
 
     public User saveUser(CreateUserRequest request) {
+        validateUser(request);
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTS);
         }
@@ -111,5 +113,35 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(userName)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return userMapper.toUserResponse(user);
+    }
+
+    public static void validateUser(CreateUserRequest request) {
+        if (request.getUsername().length() < 4) {
+            throw new AppException(ErrorCode.USERNAME_MIN_INVALID);
+        }
+        if (request.getUsername().length() > 30) {
+            throw new AppException(ErrorCode.USERNAME_MAX_INVALID);
+        }
+
+        String username = request.getUsername();
+        String usernameRegex = "^[a-zA-Z0-9]*$";
+
+        if (!username.matches(usernameRegex)) {
+            throw new AppException(ErrorCode.USERNAME_SPECIAL_CHAR_INVALID);
+        }
+
+        if (request.getPassword().length() < 4) {
+            throw new AppException(ErrorCode.PASSWORD_MIN_INVALID);
+        }
+        if (request.getPassword().length() > 30) {
+            throw new AppException(ErrorCode.PASSWORD_MAX_INVALID);
+        }
+
+        String password = request.getPassword();
+        String regex = ".*[0-9!@#$%^&*(),.?\":{}|<>~_+=\\-].*";
+
+        if (!password.matches(regex)) {
+            throw new AppException(ErrorCode.PASSWORD_SPECIAL_CHAR_INVALID);
+        }
     }
 }

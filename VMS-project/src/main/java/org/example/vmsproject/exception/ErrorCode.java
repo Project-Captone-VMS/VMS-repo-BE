@@ -10,13 +10,17 @@ public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized exception", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_KEY(1001, "Invalid message key", HttpStatus.BAD_REQUEST),
     USER_EXISTS(1002, "User exists", HttpStatus.BAD_REQUEST),
-    USERNAME_INVALID(1003, "Username must be at least {min} characters", HttpStatus.BAD_REQUEST),
-    INVALID_PASSWORD(1004, "Password must be at least {min} characters", HttpStatus.BAD_REQUEST),
-    USER_NOT_EXISTS(1005, "User not existed", HttpStatus.NOT_FOUND),
+    USER_NOT_EXISTS(1004, "User not existed", HttpStatus.NOT_FOUND),
     ROLE_NOT_FOUND(1005, "Role not found", HttpStatus.NOT_FOUND),
     UNAUTHENTICATED(1006, "Authenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1007, "You do not have permission", HttpStatus.FORBIDDEN),
     INVALID_DOB(1008, "You are must be least {min}", HttpStatus.BAD_REQUEST),
+    USERNAME_MIN_INVALID(1009, "Username must be at least 4 characters", HttpStatus.BAD_REQUEST),
+    USERNAME_MAX_INVALID(1010, "Username must be at most 30 characters", HttpStatus.BAD_REQUEST),
+    USERNAME_SPECIAL_CHAR_INVALID(1011, "Username must not contain special characters", HttpStatus.BAD_REQUEST),
+    PASSWORD_MIN_INVALID(1012, "Password must be at least 4 characters", HttpStatus.BAD_REQUEST),
+    PASSWORD_MAX_INVALID(1013, "Password must be at most 30 characters", HttpStatus.BAD_REQUEST),
+    PASSWORD_SPECIAL_CHAR_INVALID(1014, "Password must contain at least one number or special character", HttpStatus.BAD_REQUEST);
     ;
 
     private final int code;
