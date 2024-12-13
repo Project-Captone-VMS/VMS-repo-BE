@@ -23,12 +23,8 @@ import java.util.Optional;
 @RequestMapping("/api/driver")
 public class DriverController {
 
-<<<<<<< Updated upstream
     @Autowired
     private DriverService driverService;
-=======
-    DriverServiceImpl driverService;
->>>>>>> Stashed changes
 
     @GetMapping("/all")
     public ResponseEntity<List<Driver>> getAllDrivers() {
