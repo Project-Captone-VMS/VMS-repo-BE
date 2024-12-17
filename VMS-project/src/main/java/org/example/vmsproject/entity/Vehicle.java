@@ -23,12 +23,9 @@ public class Vehicle {
     private Boolean status = false;
     private LocalDate maintenanceSchedule;
 
-
-    @OneToMany(mappedBy = "vehicle")
-    private List<Incident> incidents;
-
-    @OneToMany(mappedBy = "vehicle")
-    private List<Expense> expenses;
+//
+//    @OneToMany(mappedBy = "vehicle")
+//    private List<Expense> expenses;
 
 
 }

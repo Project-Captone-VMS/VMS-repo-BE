@@ -29,6 +29,9 @@ public class Driver {
     private Boolean isDeleted = false;
     private LocalDateTime deleteAt;
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    private User user;
 //
 //    @OneToMany(mappedBy = "driver")
 //    private List<Expense>expenses;
