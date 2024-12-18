@@ -80,4 +80,14 @@ public class RouteController {
         return routeService.getRouteByRouteId(routeId);
     }
 
+
+    @GetMapping("/allRoute/{username}")
+    public List<Route> listAllRouteByUsername(@PathVariable("username") String username) {
+        return routeService.getAllRouteByUserName(username);
+    }
+
+    @GetMapping("/all")
+    public List<Route> listAll() {
+        return routeService.getAllRoute();
+    }
 }

@@ -10,11 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RouteRepository extends JpaRepository<Route, Long> {
-    @Query("SELECT r FROM Route r WHERE r.driver.driverId = :driverId AND r.vehicle.vehicleId = :vehicleId ")
-    Optional<Route> findRouteByDriverAndVehicle(
-            @Param("driverId") Long driverId,
-            @Param("vehicleId") Long vehicleId
-    );
 
     @Query("SELECT r FROM Route r WHERE r.status = false")
     List<Route> getAllRoutesByStatus();
@@ -29,6 +24,13 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
             "WHERE u.username = :username " +
             "AND r.status = false")
     List<Route> findRoutesByUsername(@Param("username") String username);
+
+    @Query("SELECT r " +
+            "FROM Route r " +
+            "JOIN r.driver d " +
+            "JOIN User u ON u.email = d.email " +
+            "WHERE u.username = :username ")
+    List<Route> listAllRouteByUsername(@Param("username") String username);
 
     @Query("SELECT r " +
             "FROM Route r " +

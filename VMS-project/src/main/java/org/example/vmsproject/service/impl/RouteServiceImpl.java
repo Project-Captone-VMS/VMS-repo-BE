@@ -242,4 +242,14 @@ public class RouteServiceImpl implements RouteService {
     public List<Route> getRouteByUserNameDone(String username) {
         return routeRepository.findRoutesByUsernameDone(username);
     }
+
+    @Override
+    public List<Route> getAllRouteByUserName(String username) {
+        return routeRepository.listAllRouteByUsername(username);
+    }
+
+    @Override
+    public List<Route> getAllRoute() {
+        return routeRepository.findAll();
+    }
 }
