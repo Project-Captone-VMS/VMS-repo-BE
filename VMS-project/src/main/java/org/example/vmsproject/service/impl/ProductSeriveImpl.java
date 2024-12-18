@@ -51,5 +51,8 @@ public class ProductSeriveImpl implements ProductService {
         return "Product deleted successfully";
     }
 
-
+    @Override
+    public int totalProducts() {
+        return productRepository.findTotalProducts();
+    }
 }

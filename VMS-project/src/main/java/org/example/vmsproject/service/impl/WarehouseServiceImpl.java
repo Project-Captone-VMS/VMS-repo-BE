@@ -54,4 +54,24 @@ public class WarehouseServiceImpl implements WarehouseService {
         return warehouseRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public int totalWarehouse() {
+        return warehouseRepository.findTotalWarehouses();
+    }
+
+    @Override
+    public int totalLocation() {
+        return warehouseRepository.findTotalLocations();
+    }
+
+    @Override
+    public int totalOver() {
+        return warehouseRepository.findTotalOvers();
+    }
+
+    @Override
+    public int totalLess() {
+        return warehouseRepository.findTotalLesss();
+    }
+
 }

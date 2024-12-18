@@ -11,4 +11,9 @@ public interface WarehouseService {
     String addWarehouse(WarehouseDTO warehouse);
     String updateWarehouse(long id ,WarehouseDTO warehouse);
     String deleteWarehouse(long id);
+
+    int totalWarehouse();
+    int totalLocation();
+    int totalOver();
+    int totalLess();
 }

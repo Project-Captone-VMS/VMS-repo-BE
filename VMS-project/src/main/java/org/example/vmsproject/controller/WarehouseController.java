@@ -46,4 +46,27 @@ public class WarehouseController {
         String result = warehouseService.deleteWarehouse(id);
         return ResponseEntity.ok(result);
     }
+    @GetMapping("/totalWarehouse")
+    public ResponseEntity<?> getTotalWarehouse() {
+        int result = warehouseService.totalWarehouse();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/totalLocation")
+    public ResponseEntity<?> getTotalLocation() {
+        int result = warehouseService.totalLocation();
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/totalOver")
+    public ResponseEntity<?> getTotalOver() {
+        int result = warehouseService.totalOver();
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/totalLess")
+    public ResponseEntity<?> getTotalLess() {
+        int result = warehouseService.totalLess();
+        return ResponseEntity.ok(result);
+    }
+
+
 }

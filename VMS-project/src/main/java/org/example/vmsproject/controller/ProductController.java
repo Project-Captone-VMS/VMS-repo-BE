@@ -46,4 +46,10 @@ public class ProductController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/totalProduct")
+    public ResponseEntity<?> getTotalLess() {
+        int result = productService.totalProducts();
+        return ResponseEntity.ok(result);
+    }
+
 }

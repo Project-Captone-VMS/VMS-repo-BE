@@ -11,4 +11,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.warehouse.warehouseId = :warehouseId")
     List<Product> findAllByWarehouseId(@Param("warehouseId") Long warehouseId);
+    @Query("select count(*) as total_products From Product ")
+    int findTotalProducts();
 }

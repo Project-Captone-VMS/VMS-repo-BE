@@ -13,4 +13,6 @@ public interface VehicleService {
     String addVehicle(VehicleDTO vehicle);
     String deleteVehicle(long id);
     List<Vehicle> getAllVehiclesNoActive();
+
+    int totalVehicles();
 }

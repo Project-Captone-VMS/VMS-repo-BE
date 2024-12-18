@@ -32,8 +32,15 @@ public class ExpenseServiceImpl implements ExpenseService {
         expense.setAmount(expenseDTO.getAmount());
         expense.setCategory(expenseDTO.getCategory());
         expense.setDate(expenseDTO.getDate());
-        expense.setDriver(expenseDTO.getDriver());
-        expense.setVehicle(expenseDTO.getVehicle());
+
+        // Handle null values for vehicle and driver
+        if (expenseDTO.getVehicle() != null && expenseDTO.getVehicle().getVehicleId() != null) {
+            expense.setVehicle(expenseDTO.getVehicle());
+        }
+        if (expenseDTO.getDriver() != null && expenseDTO.getDriver().getDriverId() != null) {
+            expense.setDriver(expenseDTO.getDriver());
+        }
+
         expenseRepository.save(expense);
         return "Added expense successfully";
     }

@@ -11,4 +11,6 @@ public interface ProductService {
     String addProduct(ProductDTO product);
     String updateProduct(Long id,ProductDTO product);
     String deleteProduct(Long id);
+
+    int totalProducts();
 }

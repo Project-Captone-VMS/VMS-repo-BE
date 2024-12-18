@@ -57,4 +57,10 @@ public class VehicleController {
         List<Vehicle> vehicle = vehicleService.getAllVehiclesNoActive();
         return ResponseEntity.ok(vehicle);
     }
+
+    @GetMapping("/totalVehicle")
+    public ResponseEntity<?> getTotalvehicle() {
+        int result = vehicleService.totalVehicles();
+        return ResponseEntity.ok(result);
+    }
 }

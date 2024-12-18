@@ -59,4 +59,8 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> getAllVehiclesNoActive() {
         return vehicleRepository.findAllVehicleNoActive();
     }
+
+    public int totalVehicles() {
+        return vehicleRepository.findTotalVehicles();
+    }
 }
