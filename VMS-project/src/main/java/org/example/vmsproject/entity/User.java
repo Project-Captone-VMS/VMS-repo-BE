@@ -1,5 +1,6 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -28,5 +29,8 @@ public class User {
 
     @ManyToMany
     Set<Role> roles;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Driver driver;
 
 }

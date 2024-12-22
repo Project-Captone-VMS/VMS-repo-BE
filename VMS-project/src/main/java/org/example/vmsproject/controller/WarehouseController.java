@@ -5,6 +5,7 @@ import org.example.vmsproject.dto.WarehouseDTO;
 import org.example.vmsproject.entity.Warehouse;
 import org.example.vmsproject.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,21 +31,21 @@ public class WarehouseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addWarehouse(@Valid @RequestBody WarehouseDTO warehouse) {
-        String result = warehouseService.addWarehouse(warehouse);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> addWarehouse(@Valid @RequestBody WarehouseDTO warehouse) {
+        warehouseService.addWarehouse(warehouse);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateWarehouse(@PathVariable("id") long id,@Valid @RequestBody WarehouseDTO warehouse) {
-        String result = warehouseService.updateWarehouse(id, warehouse);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> updateWarehouse(@PathVariable("id") long id,@Valid @RequestBody WarehouseDTO warehouse) {
+          warehouseService.updateWarehouse(id, warehouse);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteWarehouse(@PathVariable("id") long id) {
-        String result = warehouseService.deleteWarehouse(id);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> deleteWarehouse(@PathVariable("id") Long id) {
+         warehouseService.deleteWarehouse(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
     @GetMapping("/totalWarehouse")
     public ResponseEntity<?> getTotalWarehouse() {

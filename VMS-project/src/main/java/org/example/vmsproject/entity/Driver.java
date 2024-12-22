@@ -1,5 +1,7 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,11 +28,14 @@ public class Driver {
     private Boolean status = false;
     private String email;
     private String phoneNumber;
+    @JsonIgnore
     private Boolean isDeleted = false;
+    @JsonIgnore
     private LocalDateTime deleteAt;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 //
 //    @OneToMany(mappedBy = "driver")

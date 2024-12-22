@@ -17,6 +17,11 @@ public enum ErrorCode {
     UNAUTHENTICATED(1006, "Authenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1007, "You do not have permission", HttpStatus.FORBIDDEN),
     INVALID_DOB(1008, "You are must be least {min}", HttpStatus.BAD_REQUEST),
+    INVALID_CAPACITY(1009, "Cannot add product: Quantity exceeds warehouse capacity", HttpStatus.BAD_REQUEST),
+    INVALID_WAREHOUSE(1010, "Warehouse not found", HttpStatus.BAD_REQUEST),
+    INVALID_PRODUCT(1011, "Product not found", HttpStatus.BAD_REQUEST),
+    INVALID_CAPACITY_ZERO(1011, "Cannot decrease stock below zero", HttpStatus.BAD_REQUEST),
+    WAREHOUSE_ALREADY_EXISTS(1012,"Warehouse name anh location exists", HttpStatus.BAD_REQUEST);
     ;
 
     private final int code;

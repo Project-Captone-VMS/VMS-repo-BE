@@ -1,7 +1,10 @@
 package org.example.vmsproject.service.impl;
 
-import org.example.vmsproject.dto.DriverDTO;
+import org.example.vmsproject.dto.request.DriverRequest;
+import org.example.vmsproject.dto.response.DriverResponse;
 import org.example.vmsproject.entity.Driver;
+import org.example.vmsproject.mapper.DriverMapper;
+import org.example.vmsproject.mapper.DriverMapperImpl;
 import org.example.vmsproject.repository.DriverRepository;
 import org.example.vmsproject.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,10 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private DriverRepository driverRepository;
-
+    @Autowired
+    private DriverMapperImpl driverMapperImpl;
+    @Autowired
+    DriverMapper driverMapper;
     @Override
     public List<Driver> getAllDrivers() {
         return driverRepository.findAllDeleted();
@@ -28,20 +34,25 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public String updateDriver(long id, DriverDTO driverDTO) {
-        Optional<Driver> optionalDriver = driverRepository.findById(id);
-        if (optionalDriver.isPresent()) {
-            Driver driver = optionalDriver.get();
-            driver.setLicenseNumber(driverDTO.getLicenseNumber());
-            driver.setWorkSchedule(driverDTO.getWorkSchedule());
-            driver.setEmail(driverDTO.getEmail());
-            driver.setPhoneNumber(driverDTO.getPhoneNumber());
-            driverRepository.save(driver);
-            return "Driver updated successfully.";
-        } else {
-            return "Driver not found.";
+    public Driver updateDriver(Long id, DriverRequest request) {
+        Optional<Driver> driverResponseOptional = driverRepository.findById(id);
+        if (driverResponseOptional.isEmpty()) {
+            throw new RuntimeException("Driver not found with ID: " + id);
         }
+
+        Driver driver = driverResponseOptional.get();
+        driver.setFirstName(request.getFirstName());
+        driver.setLastName(request.getLastName());
+        driver.setLicenseNumber(request.getLicenseNumber());
+        driver.setWorkSchedule(request.getWorkSchedule());
+        driver.setEmail(request.getEmail());
+        driver.setPhoneNumber(request.getPhoneNumber());
+        driver.setStatus(request.getStatus());
+        driverRepository.save(driver);
+        return driver;
     }
+
+
 
     @Override
     public String softDeleteDriver(long id) {

@@ -8,9 +8,9 @@ import java.util.List;
 public interface WarehouseService {
     List<Warehouse> getAllWarehouses();
     Warehouse getWarehouseById(long  id);
-    String addWarehouse(WarehouseDTO warehouse);
-    String updateWarehouse(long id ,WarehouseDTO warehouse);
-    String deleteWarehouse(long id);
+    void addWarehouse(WarehouseDTO warehouse);
+    Warehouse updateWarehouse(long id ,WarehouseDTO warehouse);
+    void deleteWarehouse(Long id);
 
     int totalWarehouse();
     int totalLocation();

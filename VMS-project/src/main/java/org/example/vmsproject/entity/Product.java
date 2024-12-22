@@ -2,13 +2,17 @@ package org.example.vmsproject.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "product")
 public class Product {
     @Id
@@ -18,8 +22,8 @@ public class Product {
     private double price;
     private int quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "warsehouse_id")
+    @ManyToOne()
+    @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 }
 

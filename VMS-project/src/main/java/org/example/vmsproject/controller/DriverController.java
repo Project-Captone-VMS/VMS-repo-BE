@@ -1,11 +1,14 @@
 package org.example.vmsproject.controller;
 
 import jakarta.validation.Valid;
-import org.example.vmsproject.dto.DriverDTO;
+import org.example.vmsproject.dto.request.AuthenticationRequest;
+import org.example.vmsproject.dto.request.DriverRequest;
+import org.example.vmsproject.dto.response.ApiResponse;
+import org.example.vmsproject.dto.response.AuthenticationResponse;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.service.DriverService;
-import org.example.vmsproject.service.impl.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,9 +36,11 @@ public class DriverController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateDriver(@PathVariable("id") long id, @Valid @RequestBody DriverDTO driverDTO) {
-        String result = driverService.updateDriver(id, driverDTO);
-        return ResponseEntity.ok(result);
+    public ApiResponse<Driver> updateDriver(@PathVariable("id") long id, @RequestBody DriverRequest request) {
+        Driver result = driverService.updateDriver(id, request);
+        return ApiResponse.<Driver>builder()
+                .result(result)
+                .build();
     }
 
     @DeleteMapping("/delete/{id}")

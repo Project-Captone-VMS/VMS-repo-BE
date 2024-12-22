@@ -1,22 +1,23 @@
-package org.example.vmsproject.dto.response;
+package org.example.vmsproject.dto.request;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
-@Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class DriverResponse {
+public class DriverRequest {
     private Long driverId;
     private String firstName;
     private String lastName;
+    private String phoneNumber;
     private String licenseNumber;
     private String workSchedule;
-    private String status;
+    private Boolean status;
+    private String email;
 //    private Boolean isDeleted = false;
 //    private LocalDateTime deleteAt;
 }

@@ -21,7 +21,8 @@ public class SecurityConfig {
     private CustomJwtDecoder customJwtDecoder;
 
     private final String[] PUBLIC_ENDPOINTS = {
-            "/api/auth/token", "/api/auth/introspect", "/api/auth/logout", "/api/auth/refresh","/ws/**","/api/user/create"
+            "/api/auth/token", "/api/auth/introspect", "/api/auth/logout", "/api/auth/refresh","/ws/**","/api/user/create",
+            "/api/driver/update/1","/api/driver/all"
     };
 
 //    @Value("${jwt.signerKey}")

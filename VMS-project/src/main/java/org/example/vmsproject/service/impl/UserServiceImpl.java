@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTS);
         }
+
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
@@ -50,18 +51,22 @@ public class UserServiceImpl implements UserService {
         roles.add(userRole);
         user.setRoles(roles);
 
-        Driver driver = Driver.builder().driverId(request.getId())
+        Driver driver = Driver.builder()
+                .driverId(request.getId())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .isDeleted(false)
                 .status(false)
-                .phoneNumber(request.getPhoneNumber()).build();
+                .phoneNumber(request.getPhoneNumber())
+                .user(user)
+                .build();
 
-        driverRepository.save(driver);
+        user.setDriver(driver);
 
         return userRepository.save(user);
     }
+
 
 
     //    @PreAuthorize("hasRole('ADMIN')")

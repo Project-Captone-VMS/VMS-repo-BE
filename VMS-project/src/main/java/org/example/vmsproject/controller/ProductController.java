@@ -4,6 +4,7 @@ import org.example.vmsproject.dto.ProductDTO;
 import org.example.vmsproject.entity.Product;
 import org.example.vmsproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,21 +30,21 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addProduct(@RequestBody ProductDTO product) {
-        String result = productService.addProduct(product);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> addProduct(@RequestBody ProductDTO request) {
+        productService.addProduct(request);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable("id")long id,@RequestBody ProductDTO product) {
-        String result = productService.updateProduct(id, product);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> updateProduct(@PathVariable("id")long id,@RequestBody ProductDTO product) {
+        productService.updateProduct(id, product);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("id")long id) {
-        String result = productService.deleteProduct(id);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> deleteProduct(@PathVariable("id")long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/totalProduct")
