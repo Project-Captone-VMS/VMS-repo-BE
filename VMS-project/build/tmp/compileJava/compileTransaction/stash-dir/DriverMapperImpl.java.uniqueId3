@@ -3,42 +3,39 @@ package org.example.vmsproject.mapper;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.annotation.processing.Generated;
-import org.example.vmsproject.dto.request.CreateUserRequest;
+import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
 import org.example.vmsproject.dto.response.UserResponse;
+import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.entity.Role;
 import org.example.vmsproject.entity.User;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-<<<<<<< Updated upstream
-    date = "2024-10-29T13:11:06+0700",
-=======
-    date = "2024-12-04T13:34:54+0700",
->>>>>>> Stashed changes
+    date = "2024-11-01T13:50:18+0700",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
 )
 @Component
-public class UserMapperImpl implements UserMapper {
+public class DriverMapperImpl implements DriverMapper {
 
     @Override
-    public User toUser(CreateUserRequest request) {
+    public Driver toDriver(DriverDTO request) {
         if ( request == null ) {
             return null;
         }
 
-        User.UserBuilder user = User.builder();
+        Driver.DriverBuilder driver = Driver.builder();
 
-        user.id( request.getId() );
-        user.username( request.getUsername() );
-        user.firstName( request.getFirstName() );
-        user.lastName( request.getLastName() );
-        user.password( request.getPassword() );
-        user.email( request.getEmail() );
-        user.phoneNumber( request.getPhoneNumber() );
+        driver.firstName( request.getFirstName() );
+        driver.lastName( request.getLastName() );
+        driver.licenseNumber( request.getLicenseNumber() );
+        driver.workSchedule( request.getWorkSchedule() );
+        driver.status( request.getStatus() );
+        driver.isDeleted( request.getIsDeleted() );
+        driver.deleteAt( request.getDeleteAt() );
 
-        return user.build();
+        return driver.build();
     }
 
     @Override

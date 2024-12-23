@@ -2,6 +2,10 @@ package org.example.vmsproject.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+<<<<<<< HEAD
+=======
+import org.example.vmsproject.dto.RouteDTO;
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
 import org.example.vmsproject.dto.response.ApiRouteResponse;
 import org.example.vmsproject.entity.*;
 import org.example.vmsproject.repository.*;
@@ -22,6 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+<<<<<<< HEAD
+=======
+import java.util.stream.Collectors;
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
 
 @Service
 public class RouteServiceImpl implements RouteService {
@@ -42,6 +50,11 @@ public class RouteServiceImpl implements RouteService {
 
     @Autowired
     private VehicleService vehicleService;
+<<<<<<< HEAD
+=======
+    @Autowired
+    private RouteEntityRepository routeEntityRepository;
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
 
 
     @Value("${here.api.key}")
@@ -82,6 +95,7 @@ public class RouteServiceImpl implements RouteService {
         String jsonRespone = restTemplate.getForObject(url, String.class);
 
 
+<<<<<<< HEAD
 
 //        Optional<Route> existingRoute = routeRepository.findRouteByDriverAndVehicle(driverId, vehicleId);
 //        if (existingRoute.isPresent()) {
@@ -112,11 +126,38 @@ public class RouteServiceImpl implements RouteService {
             return "Create Route Failed " + e.getMessage();
         }
 
+=======
+        Optional<Route> existingRoute = routeRepository.findRouteByDriverAndVehicle(driverId, vehicleId);
+        if (existingRoute.isPresent()) {
+            if(existingRoute.get().getStatus()){
+                try {
+                    creatRoute(jsonRespone,existingRoute.get().getDriver().getDriverId(),existingRoute.get().getVehicle().getVehicleId());
+                    return "Create Route Successfully";
+                } catch (Exception e) {
+                    return "Create Route Failed In Set Status " + e.getMessage();
+                }
+
+            }else{
+                return "Route is not completed. Cannot create new.";
+            }
+        }else{
+            try {
+                creatRoute(jsonRespone,driverId,vehicleId);
+                return "Create Route Successfully";
+            } catch (Exception e) {
+                return "Create Route Failed " + e.getMessage();
+            }
+        }
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
     }
 
 
 
+<<<<<<< HEAD
     private void creatRoute(String jsonRespone, Long driverId, Long vehicleId) throws JsonProcessingException {
+=======
+    private void creatRoute(String jsonRespone, Long vehicleId, Long driverId) throws JsonProcessingException {
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
         // Parse JSON thành đối tượng Java
         ObjectMapper mapper = new ObjectMapper();
         ApiRouteResponse apiRouteResponse = mapper.readValue(jsonRespone, ApiRouteResponse.class);
@@ -233,6 +274,7 @@ public class RouteServiceImpl implements RouteService {
         return restTemplate.getForObject(url, Map.class);
     }
 
+<<<<<<< HEAD
     @Override
     public Optional<Route> getRouteByRouteId(long routeId) {
         return routeRepository.findById(routeId);
@@ -251,5 +293,49 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public List<Route> getAllRoute() {
         return routeRepository.findAll();
+=======
+    public List<String> getMultipleRoutes(double originLat, double originLng, double destinationLat, double destinationLng) {
+        List<String> routes = new ArrayList<>();
+
+        String url = UriComponentsBuilder.fromHttpUrl("https://router.hereapi.com/v8/routes")
+                .queryParam("transportMode", "car")
+                .queryParam("origin", originLat + "," + originLng)
+                .queryParam("destination", destinationLat + "," + destinationLng)
+                .queryParam("return", "summary,actions,polyline")
+                .queryParam("apiKey", apiKey)
+                .queryParam("alternatives", "3")
+                .build()
+                .toUriString();
+
+        String response = restTemplate.getForObject(url, String.class);
+        routes.add(response);
+
+        return routes;
+    }
+
+    public void saveRoute(RouteDTO routeDTO) {
+        RouteEntity routeEntity = new RouteEntity();
+        routeEntity.setOrigin(routeDTO.getOrigin());
+        routeEntity.setDestination(routeDTO.getDestination());
+        routeEntity.setDistance(routeDTO.getDistance());
+        routeEntity.setDuration(routeDTO.getDuration());
+        routeEntity.setPolyline(routeDTO.getPolyline());
+
+        routeEntityRepository.save(routeEntity);
+    }
+
+        public List<RouteDTO> getSavedRoutes() {
+        List<RouteEntity> entities = routeEntityRepository.findAll();
+
+        return entities.stream().map(entity -> {
+            RouteDTO dto = new RouteDTO();
+            dto.setOrigin(entity.getOrigin());
+            dto.setDestination(entity.getDestination());
+            dto.setDistance(entity.getDistance());
+            dto.setDuration(entity.getDuration());
+            dto.setPolyline(entity.getPolyline());
+            return dto;
+        }).collect(Collectors.toList());
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
     }
 }

@@ -1,6 +1,12 @@
 package org.example.vmsproject.controller;
 
+<<<<<<< HEAD
 import lombok.RequiredArgsConstructor;
+=======
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
 import org.example.vmsproject.dto.NotificationDTO;
 import org.example.vmsproject.entity.ENotification;
 import org.example.vmsproject.entity.Notification;
@@ -19,12 +25,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/notifications")
 @RequiredArgsConstructor
+<<<<<<< HEAD
 @CrossOrigin(origins = "http://localhost:5173")
 public class NotificationController {
     private final NotificationService notificationService;
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
+=======
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@CrossOrigin(origins = "http://localhost:5173")
+public class NotificationController {
+    private final NotificationService notificationService;
+    SimpMessagingTemplate messagingTemplate;
+>>>>>>> e0365414c7856d470cc05c348c4f5bb44cabc985
 
     @PostMapping("/send/{username}")
     public ResponseEntity<String> createAndSendNotification(

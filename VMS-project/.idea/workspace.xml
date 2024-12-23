@@ -52,6 +52,23 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
+<<<<<<< Updated upstream
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build VMS-project.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.VmsProjectApplication.executor": "Run",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/.Project_Capston/project_14_11/VMS-repo-BE/VMS-project",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+=======
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Gradle.Build VMS-project.executor&quot;: &quot;Run&quot;,
@@ -63,18 +80,22 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.VmsProjectApplication.executor&quot;: &quot;Run&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/.Project_Capston/VMS-repo-BE/VMS-project/src/main/java/org/example/vmsproject/service/impl&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/.Project_Capston/merge_v1/VMS-repo-BE/VMS-project&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+>>>>>>> Stashed changes
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\.Project_Capston\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject\service\impl" />
       <recent name="E:\.Project_Capston\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.vmsproject.repository" />
+      <recent name="org.example.vmsproject.entity" />
+      <recent name="org.example.vmsproject.dto" />
       <recent name="org.example.vmsproject.mapper" />
     </key>
   </component>
@@ -131,7 +152,26 @@
       <workItem from="1730183937260" duration="2781000" />
       <workItem from="1730209163535" duration="8564000" />
       <workItem from="1730306564277" duration="1594000" />
-      <workItem from="1730358769894" duration="322000" />
+      <workItem from="1730358769894" duration="660000" />
+      <workItem from="1730387479020" duration="378000" />
+      <workItem from="1730392554386" duration="304000" />
+      <workItem from="1730442397223" duration="1793000" />
+      <workItem from="1730511041407" duration="1595000" />
+      <workItem from="1730702266393" duration="1472000" />
+      <workItem from="1730731197493" duration="137000" />
+      <workItem from="1731567936475" duration="1128000" />
+      <workItem from="1731598501191" duration="67000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1731604975942" duration="173000" />
+      <workItem from="1731605170501" duration="458000" />
+      <workItem from="1731824660754" duration="35000" />
+      <workItem from="1733294052952" duration="477000" />
+      <workItem from="1733294596585" duration="8000" />
+      <workItem from="1733294691398" duration="5506000" />
+      <workItem from="1733380387078" duration="1887000" />
+      <workItem from="1733411825457" duration="613000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
