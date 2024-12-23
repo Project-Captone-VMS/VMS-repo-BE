@@ -20,8 +20,6 @@ public class DriverServiceImpl implements DriverService {
     @Autowired
     private DriverRepository driverRepository;
     @Autowired
-    private DriverMapperImpl driverMapperImpl;
-    @Autowired
     DriverMapper driverMapper;
     @Override
     public List<Driver> getAllDrivers() {
@@ -53,7 +51,6 @@ public class DriverServiceImpl implements DriverService {
     }
 
 
-
     @Override
     public String softDeleteDriver(long id) {
         Optional<Driver> optionalDriver = driverRepository.findById(id);
@@ -77,6 +74,12 @@ public class DriverServiceImpl implements DriverService {
     public List<Driver> getAllDriversNoActive() {
         return driverRepository.findAllNoActive();
     }
+
+    @Override
+    public Driver findAllDriverByUsername(String username) {
+        return driverRepository.findAllByUserUsername(username);
+    }
+
 
     @Override
     public int totalDrivers() {

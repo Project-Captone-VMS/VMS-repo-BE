@@ -84,4 +84,10 @@ public class DriverController {
         int result = driverService.totalWeeks();
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/getInfo/{username}")
+    public ResponseEntity<?> getInfo(@PathVariable("username") String username) {
+        Driver driver = driverService.findAllDriverByUsername(username);
+        return ResponseEntity.ok(driver);
+    }
 }

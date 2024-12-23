@@ -13,10 +13,18 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PACKAGE)
 public class UpdateUserRequest {
-    @Size(min = 6, message = "USERNAME_INVALID")
     String username;
-    @Size(min = 8, message = "INVALID_PASSWORD")
+    String firstName;
+    String lastName;
     String password;
+    String email;
+    String phoneNumber;
     LocalDate dob;
     List<String> roles;
+
+//    @Size(min = 6, message = "USERNAME_INVALID")
+//    String username;
+//    @Size(min = 8, message = "INVALID_PASSWORD")
+//    String password;
+
 }

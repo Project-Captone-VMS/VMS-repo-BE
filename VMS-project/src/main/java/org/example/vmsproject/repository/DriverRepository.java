@@ -32,4 +32,6 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 
     @Query("select count(d) from Driver d where d.isDeleted = false and d.workSchedule = 'Monday-Friday'")
     int findTotalWeeks();
+
+    Driver findAllByUserUsername(String username);
 }

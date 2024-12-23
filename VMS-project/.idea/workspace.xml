@@ -63,14 +63,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.VmsProjectApplication.executor": "Run",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/.Project_Capston/git-merge/VMS-repo-BE/VMS-project",
+    "last_opened_file_path": "E:/.Project_Capston/project-finish/VMS-repo-BE/VMS-project",
     "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\.Project_Capston\project-finish\v2\VMS-repo-BE\VMS-project" />
       <recent name="E:\.Project_Capston\git-merge\VMS-repo-BE\VMS-project" />
       <recent name="E:\.Project_Capston\project_14-11-v2\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject" />
       <recent name="E:\.Project_Capston\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject\service\impl" />
@@ -82,7 +83,7 @@
   </component>
   <component name="RunManager">
     <configuration name="VmsProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="VMS-project.main" />
+      <module name="VMS-project" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.vmsproject.VmsProjectApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -145,6 +146,7 @@
       <workItem from="1731604975942" duration="173000" />
       <workItem from="1731605170501" duration="458000" />
       <workItem from="1731824660754" duration="35000" />
+      <workItem from="1734947317850" duration="180000" />
     </task>
     <servers />
   </component>
