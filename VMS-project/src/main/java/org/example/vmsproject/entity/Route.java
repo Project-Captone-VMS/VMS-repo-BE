@@ -21,20 +21,14 @@ public class Route {
     private int totalDistance;
     private int totalTime;
     private String description;
-
-    // Thêm thông tin điểm bắt đầu
     private double startLat;
     private double startLng;
-
-    // Thêm thông tin điểm kết thúc
     private double endLat;
     private double endLng;
 
-    // Quan hệ với Waypoint
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Waypoint> waypoints;
 
-    // Quan hệ với Interconnection
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Interconnection> interconnections;
 

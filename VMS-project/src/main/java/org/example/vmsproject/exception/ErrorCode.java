@@ -22,14 +22,13 @@ public enum ErrorCode {
     INVALID_PRODUCT(1011, "Product not found", HttpStatus.BAD_REQUEST),
     INVALID_CAPACITY_ZERO(1011, "Cannot decrease stock below zero", HttpStatus.BAD_REQUEST),
     WAREHOUSE_ALREADY_EXISTS(1012,"Warehouse name anh location exists", HttpStatus.BAD_REQUEST),
-    USER_NOT_FOUND(1005, "User not found", HttpStatus.NOT_FOUND),
-<<<<<<< HEAD
-    INVALID_OLDPASSWORD(1005, "old password invalid",  HttpStatus.BAD_REQUEST);
+    USER_NOT_FOUND(1013, "User not found", HttpStatus.NOT_FOUND),
+    DRIVER_NOT_FOUND(1014, "User not found", HttpStatus.NOT_FOUND),
+    INVALID_OLDPASSWORD(1015, "old password invalid",  HttpStatus.BAD_REQUEST),
+    SHIPMENT_NOT_FOUND(1016, "old password invalid",  HttpStatus.BAD_REQUEST),
+    ITEM_NOT_FOUND(1016, "Item not found",  HttpStatus.BAD_REQUEST);
     ;
-=======
-    DRIVER_NOT_FOUND(1005, "User not found", HttpStatus.NOT_FOUND);
 
->>>>>>> f89c6db8d8912cef8ab572495dd9b807ed776116
 
     private final int code;
     private final String message;
