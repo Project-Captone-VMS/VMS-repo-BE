@@ -24,7 +24,7 @@ public enum ErrorCode {
     WAREHOUSE_ALREADY_EXISTS(1012,"Warehouse name anh location exists", HttpStatus.BAD_REQUEST),
     USER_NOT_FOUND(1005, "User not found", HttpStatus.NOT_FOUND),
     DRIVER_NOT_FOUND(1005, "User not found", HttpStatus.NOT_FOUND);
-    ;
+
 
     private final int code;
     private final String message;

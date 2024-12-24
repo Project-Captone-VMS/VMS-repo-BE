@@ -45,12 +45,6 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 //            "WHERE d.user.username = :username")
 //    DriverDTO findByUserUsername(@Param("username") String username);
 
-
-
-
-
-
-
-
+    Driver findAllByUserUsername(String username);
 
 }

@@ -52,6 +52,7 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Gradle.Build VMS-project.executor&quot;: &quot;Run&quot;,
@@ -67,10 +68,28 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build VMS-project.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.VmsProjectApplication.executor": "Run",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/.Project_Capston/project-finish/VMS-repo-BE/VMS-project",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+>>>>>>> 64a385dce7206ca683604aba7ebd9e45b48e6705
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\.Project_Capston\project-finish\v2\VMS-repo-BE\VMS-project" />
       <recent name="E:\.Project_Capston\git-merge\VMS-repo-BE\VMS-project" />
       <recent name="E:\.Project_Capston\project_14-11-v2\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject" />
       <recent name="E:\.Project_Capston\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject\service\impl" />
@@ -82,7 +101,7 @@
   </component>
   <component name="RunManager">
     <configuration name="VmsProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="VMS-project.main" />
+      <module name="VMS-project" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.vmsproject.VmsProjectApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -145,11 +164,15 @@
       <workItem from="1731604975942" duration="173000" />
       <workItem from="1731605170501" duration="458000" />
       <workItem from="1731824660754" duration="35000" />
+<<<<<<< HEAD
       <workItem from="1734946559738" duration="4491000" />
       <workItem from="1734965065106" duration="9398000" />
       <workItem from="1734975372521" duration="334000" />
       <workItem from="1735035287214" duration="411000" />
       <workItem from="1735035808811" duration="131000" />
+=======
+      <workItem from="1734947317850" duration="180000" />
+>>>>>>> 64a385dce7206ca683604aba7ebd9e45b48e6705
     </task>
     <servers />
   </component>
