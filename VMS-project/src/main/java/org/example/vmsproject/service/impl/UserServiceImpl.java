@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.example.vmsproject.dto.request.CreateUserRequest;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
+import org.example.vmsproject.dto.request.UserRequest;
 import org.example.vmsproject.dto.response.UserResponse;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.entity.Role;
@@ -19,6 +20,7 @@ import org.example.vmsproject.repository.UserRepository;
 import org.example.vmsproject.service.UserService;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -120,4 +122,21 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return userMapper.toUserResponse(user);
     }
+
+
+    @Override
+    public User changePassword(String username, UserRequest request ) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTS));
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        boolean authenticated = passwordEncoder.matches(request.getOldPassword(), user.getPassword());
+        if (!authenticated) {
+            throw new AppException(ErrorCode.INVALID_OLDPASSWORD);
+        }else{
+            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+            userRepository.save(user);
+        }
+        return user;
+    }
+
 }

@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.example.vmsproject.dto.request.CreateUserRequest;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
+import org.example.vmsproject.dto.request.UserRequest;
 import org.example.vmsproject.dto.response.ApiResponse;
 import org.example.vmsproject.dto.response.UserResponse;
 import org.example.vmsproject.entity.User;
@@ -81,5 +82,14 @@ public class UserController {
                 .build();
         return ResponseEntity.ok(response);
     }
+
+
+    @PostMapping("/change-password/{username}")
+    public ResponseEntity<?>changePassword(@PathVariable("username") String username, @RequestBody UserRequest request){
+        User user = userService.changePassword(username,request);
+        return ResponseEntity.ok(user);
+    }
+
+
 
 }
