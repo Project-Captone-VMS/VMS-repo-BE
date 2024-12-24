@@ -37,6 +37,10 @@ public class Warehouse {
     @OneToMany(mappedBy = "warehouse")
     private List<Product> products;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "warehouse")
+    private List<Item> items;
+
     public void addCurrentStock(int quantity) {
         if (quantity > 0) {
             this.currentStock += quantity;

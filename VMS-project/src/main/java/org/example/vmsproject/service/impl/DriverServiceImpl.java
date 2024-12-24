@@ -1,11 +1,17 @@
 package org.example.vmsproject.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.example.vmsproject.dto.request.DriverRequest;
+import org.example.vmsproject.dto.request.UpdateDriverRequest;
 import org.example.vmsproject.dto.response.DriverResponse;
 import org.example.vmsproject.entity.Driver;
+import org.example.vmsproject.entity.User;
+import org.example.vmsproject.exception.AppException;
+import org.example.vmsproject.exception.ErrorCode;
 import org.example.vmsproject.mapper.DriverMapper;
 import org.example.vmsproject.mapper.DriverMapperImpl;
 import org.example.vmsproject.repository.DriverRepository;
+import org.example.vmsproject.repository.UserRepository;
 import org.example.vmsproject.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +26,10 @@ public class DriverServiceImpl implements DriverService {
     @Autowired
     private DriverRepository driverRepository;
     @Autowired
-    private DriverMapperImpl driverMapperImpl;
-    @Autowired
     DriverMapper driverMapper;
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public List<Driver> getAllDrivers() {
         return driverRepository.findAllDeleted();
@@ -37,7 +44,7 @@ public class DriverServiceImpl implements DriverService {
     public Driver updateDriver(Long id, DriverRequest request) {
         Optional<Driver> driverResponseOptional = driverRepository.findById(id);
         if (driverResponseOptional.isEmpty()) {
-            throw new RuntimeException("Driver not found with ID: " + id);
+            throw new AppException(ErrorCode.DRIVER_NOT_FOUND);
         }
 
         Driver driver = driverResponseOptional.get();
@@ -51,7 +58,6 @@ public class DriverServiceImpl implements DriverService {
         driverRepository.save(driver);
         return driver;
     }
-
 
 
     @Override
@@ -77,6 +83,37 @@ public class DriverServiceImpl implements DriverService {
     public List<Driver> getAllDriversNoActive() {
         return driverRepository.findAllNoActive();
     }
+
+    @Override
+    public Driver findAllDriverByUsername(String username) {
+        return driverRepository.findByUserUsername(username);
+    }
+
+    @Transactional
+    @Override
+    public Driver updateInfo(Long id, UpdateDriverRequest request) {
+        Driver driver = driverRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.DRIVER_NOT_FOUND));
+
+        driver.setEmail(request.getEmail());
+        driver.setLicenseNumber(request.getLicenseNumber());
+        driver.setWorkSchedule(request.getWorkSchedule());
+        driver.setPhoneNumber(request.getPhoneNumber());
+        driverRepository.save(driver);
+
+        Optional<User> userOptional = userRepository.findById(driver.getUser().getId());
+        if (userOptional.isEmpty()) {
+            throw new AppException(ErrorCode.USER_NOT_FOUND);
+        }
+
+        User user = userOptional.get();
+        user.setEmail(request.getEmail());
+        user.setPhoneNumber(request.getPhoneNumber());
+        userRepository.save(user);
+
+        return driver;
+    }
+
 
     @Override
     public int totalDrivers() {
