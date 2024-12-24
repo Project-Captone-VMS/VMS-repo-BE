@@ -1,7 +1,9 @@
 package org.example.vmsproject.repository;
 
+import org.example.vmsproject.dto.DriverDTO;
 import org.example.vmsproject.dto.response.DriverResponse;
 import org.example.vmsproject.entity.Driver;
+import org.example.vmsproject.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -33,5 +35,16 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
     @Query("select count(d) from Driver d where d.isDeleted = false and d.workSchedule = 'Monday-Friday'")
     int findTotalWeeks();
 
+    Driver findByUserUsername(String username);
+
+    Driver findByDriverId(Long id);
+
+//    @Query("SELECT d.firstName, d.lastName, d.email, d.licenseNumber, d.phoneNumber " +
+//            "FROM Driver d " +
+//            "JOIN d.user u " +
+//            "WHERE d.user.username = :username")
+//    DriverDTO findByUserUsername(@Param("username") String username);
+
     Driver findAllByUserUsername(String username);
+
 }

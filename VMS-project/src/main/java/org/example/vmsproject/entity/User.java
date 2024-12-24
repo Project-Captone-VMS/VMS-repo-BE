@@ -30,7 +30,6 @@ public class User {
     @ManyToMany
     Set<Role> roles;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private Driver driver;
 
 }
