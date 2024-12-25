@@ -1,5 +1,6 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,6 +27,7 @@ public class User {
     String password;
     String email;
     String phoneNumber;
+    private Boolean isDeleted = false;
 
     @ManyToMany
     Set<Role> roles;

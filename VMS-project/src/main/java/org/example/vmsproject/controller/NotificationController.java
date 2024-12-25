@@ -7,6 +7,7 @@ import org.example.vmsproject.entity.Notification;
 import org.example.vmsproject.entity.UserNotification;
 import org.example.vmsproject.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -51,5 +52,11 @@ public class NotificationController {
     public ResponseEntity<List<UserNotification>> getAllNotifications() {
         List<UserNotification> notifications = notificationService.getAllNotifications();
         return ResponseEntity.ok(notifications);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?>deleteNotification(@PathVariable("id") Long id){
+        notificationService.deleteNotification(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

@@ -41,17 +41,23 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver updateDriver(Long id, DriverRequest request) {
-        Optional<Driver> driverResponseOptional = driverRepository.findById(id);
-        if (driverResponseOptional.isEmpty()) {
-            throw new AppException(ErrorCode.DRIVER_NOT_FOUND);
-        }
-        if(driverRepository.existsByLicenseNumber(request.getLicenseNumber())){
+        Driver driver = driverRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.DRIVER_NOT_FOUND));
+
+        if (!request.getLicenseNumber().equals(driver.getLicenseNumber()) &&
+                driverRepository.existsByLicenseNumber(request.getLicenseNumber())) {
             throw new AppException(ErrorCode.LICENSE_NUMBER_EXISTS);
         }
-        if(driverRepository.existsByPhoneNumber(request.getPhoneNumber())){
+
+        if (!request.getPhoneNumber().equals(driver.getPhoneNumber()) &&
+                driverRepository.existsByPhoneNumber(request.getPhoneNumber())) {
             throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
         }
-        Driver driver = driverResponseOptional.get();
+        if (!request.getEmail().equals(driver.getEmail()) &&
+                driverRepository.existsByPhoneNumber(request.getPhoneNumber())) {
+            throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
+        }
+
         driver.setFirstName(request.getFirstName());
         driver.setLastName(request.getLastName());
         driver.setLicenseNumber(request.getLicenseNumber());
@@ -72,6 +78,10 @@ public class DriverServiceImpl implements DriverService {
             driver.setIsDeleted(true);
             driver.setDeleteAt(LocalDateTime.now());
             driverRepository.save(driver);
+
+            User user = userRepository.findUserByDriver(driver.getUser().getDriver());
+            user.setIsDeleted(true);
+            userRepository.save(user);
             return "Driver deleted successfully.";
         } else {
             return "Driver not found.";

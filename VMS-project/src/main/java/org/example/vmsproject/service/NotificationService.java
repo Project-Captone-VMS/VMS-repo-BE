@@ -11,4 +11,5 @@ public interface NotificationService {
     String createAndSendNotification(String username, NotificationDTO notificationDTO);
     List<UserNotification> getNotificationsByUsername(String username);
     List<UserNotification> getAllNotifications();
+    void deleteNotification(Long id);
 }
