@@ -1,5 +1,6 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,11 +29,11 @@ public class Shipment {
 
     @ManyToOne
     @JoinColumn(name = "route_id")
-    @JsonIgnore
+//    @JsonBackReference
     private Route route;
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id")
-    @JsonIgnore
+//    @JsonBackReference
     private Warehouse warehouse;
 }

@@ -1,5 +1,6 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class Warehouse {
     }
 
     @OneToMany(mappedBy = "warehouse")
+    @JsonBackReference
     private List<Shipment> shipments;
 
     @JsonIgnore
