@@ -99,12 +99,20 @@ public class DriverServiceImpl implements DriverService {
         Driver driver = driverRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.DRIVER_NOT_FOUND));
 
-        if(driverRepository.existsByLicenseNumber(request.getLicenseNumber())){
+        if (!request.getLicenseNumber().equals(driver.getLicenseNumber()) &&
+                driverRepository.existsByLicenseNumber(request.getLicenseNumber())) {
             throw new AppException(ErrorCode.LICENSE_NUMBER_EXISTS);
         }
-        if(driverRepository.existsByPhoneNumber(request.getPhoneNumber())){
+
+        if (!request.getPhoneNumber().equals(driver.getPhoneNumber()) &&
+                driverRepository.existsByPhoneNumber(request.getPhoneNumber())) {
             throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
         }
+        if (!request.getEmail().equals(driver.getEmail()) &&
+                driverRepository.existsByPhoneNumber(request.getPhoneNumber())) {
+            throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
+        }
+
         driver.setEmail(request.getEmail());
         driver.setLicenseNumber(request.getLicenseNumber());
         driver.setWorkSchedule(request.getWorkSchedule());
@@ -117,12 +125,17 @@ public class DriverServiceImpl implements DriverService {
         }
 
         User user = userOptional.get();
-        user.setEmail(request.getEmail());
-        user.setPhoneNumber(request.getPhoneNumber());
+        if (!request.getEmail().equals(user.getEmail())) {
+            user.setEmail(request.getEmail());
+        }
+        if (!request.getPhoneNumber().equals(user.getPhoneNumber())) {
+            user.setPhoneNumber(request.getPhoneNumber());
+        }
         userRepository.save(user);
 
         return driver;
     }
+
 
 
     @Override
