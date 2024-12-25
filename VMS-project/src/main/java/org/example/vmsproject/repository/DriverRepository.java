@@ -13,6 +13,8 @@ import java.util.Optional;
 
 public interface DriverRepository extends JpaRepository<Driver, Long> {
     Optional<Driver> findAllByDriverId(Long id);
+    boolean findByLicenseNumber(String licenseNumber);
+
 
     @Query("SELECT d FROM Driver d WHERE d.isDeleted = false")
     List<Driver> findAllDeleted();

@@ -23,7 +23,7 @@ public class Product {
     private double price;
     private int quantity;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 

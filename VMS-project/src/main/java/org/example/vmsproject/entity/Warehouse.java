@@ -32,17 +32,18 @@ public class Warehouse {
     }
 
     @OneToMany(mappedBy = "warehouse")
-    @JsonBackReference
+    @JsonBackReference(value = "warehouse-items")
+    private List<Item> items;
+
+    @OneToMany(mappedBy = "warehouse")
+    @JsonBackReference(value = "warehouse-shipments")
     private List<Shipment> shipments;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "warehouse")
+    @JsonBackReference(value = "warehouse-products")
     private List<Product> products;
 
-//    @JsonIgnore
-    @OneToMany(mappedBy = "warehouse")
-    @JsonBackReference
-    private List<Item> items;
+
 
     public void addCurrentStock(int quantity) {
         if (quantity > 0) {

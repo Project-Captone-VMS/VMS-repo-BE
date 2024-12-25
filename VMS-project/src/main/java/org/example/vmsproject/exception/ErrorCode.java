@@ -29,7 +29,8 @@ public enum ErrorCode {
     ITEM_NOT_FOUND(1016, "Item not found",  HttpStatus.BAD_REQUEST),
     PHONE_NUMBER_EXISTS(1017, "Phone number exists",  HttpStatus.BAD_REQUEST),
     EMAIL_EXISTS(1018, "Email exists",  HttpStatus.BAD_REQUEST),
-    ROUTE_NOT_FOUND(1018, "Route not found",  HttpStatus.BAD_REQUEST);
+    ROUTE_NOT_FOUND(1018, "Route not found",  HttpStatus.BAD_REQUEST),
+    LICENSE_NUMBER_EXISTS(1018, "License number exists",  HttpStatus.BAD_REQUEST);
     ;
 
 
