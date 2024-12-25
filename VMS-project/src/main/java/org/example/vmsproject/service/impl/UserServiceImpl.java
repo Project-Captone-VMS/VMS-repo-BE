@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTS);
         }
+        if(userRepository.existsByPhoneNumber(request.getPhoneNumber())){
+            throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
+        }
+        if(userRepository.existsByEmail(request.getEmail())){
+            throw new AppException(ErrorCode.EMAIL_EXISTS);
+        }
 
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));

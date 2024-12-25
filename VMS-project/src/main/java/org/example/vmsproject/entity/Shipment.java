@@ -20,7 +20,7 @@ public class Shipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long shipmentId;
-    private String status;
+    private boolean status;
 //    private LocalDateTime startDate;
 //    private LocalDateTime endDate;
 //    private String startLocation;

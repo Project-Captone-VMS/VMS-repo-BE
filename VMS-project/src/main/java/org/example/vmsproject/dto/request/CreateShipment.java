@@ -13,7 +13,15 @@ import org.example.vmsproject.entity.Warehouse;
 @Builder
 public class CreateShipment {
     private Long shipmentId;
-    private String status;
+    private boolean status;
     private Warehouse warehouse;
     protected Route route;
+
+    public boolean isStatus(boolean b) {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

@@ -31,11 +31,11 @@ public class ShipmentController {
         return ResponseEntity.ok(shipment);
     }
 
-    @PutMapping("update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody UpdateShipment request) {
-        Shipment shipment = shipmentService.updateShipment(id, request);
-        return ResponseEntity.ok(shipment);
-    }
+//    @PutMapping("update/{id}")
+//    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody UpdateShipment request) {
+//        Shipment shipment = shipmentService.updateShipment(id, request);
+//        return ResponseEntity.ok(shipment);
+//    }
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?>delete(@PathVariable("id") Long id){
         shipmentService.deleteShipment(id);

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.vmsproject.dto.response.ApiRouteResponse;
 import org.example.vmsproject.entity.*;
+import org.example.vmsproject.exception.AppException;
+import org.example.vmsproject.exception.ErrorCode;
 import org.example.vmsproject.repository.*;
 import org.example.vmsproject.service.DriverService;
 import org.example.vmsproject.service.RouteService;
@@ -34,6 +36,8 @@ public class RouteServiceImpl implements RouteService {
 
     @Autowired
     private InterconnectionRepository interconnectionRepository;
+    @Autowired
+    private ShipmentRepository shipmentRepository;
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -195,14 +199,17 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public String updateActiveRoute(long routeId) {
-        return routeRepository.findById(routeId).map(route -> {
-            route.setStatus(true);
-            route.getDriver().setStatus(false);
-            route.getVehicle().setStatus(false);
-            routeRepository.save(route);
-            return "Update Active in Route Successfully";
-        }).orElse("Update Not Active in Route Successfully");
+    public Route updateActiveRoute(long routeId) {
+        Route route = routeRepository.findById(routeId).orElseThrow(()-> new AppException(ErrorCode.ROUTE_NOT_FOUND));
+        route.setStatus(true);
+        route.getDriver().setStatus(false);
+        route.getVehicle().setStatus(false);
+        routeRepository.save(route);
+        Shipment shipment = shipmentRepository.findShipmentByRoute(route);
+        shipment.setStatus(true);
+        shipmentRepository.save(shipment);
+        return route;
+
     }
 
     @Override

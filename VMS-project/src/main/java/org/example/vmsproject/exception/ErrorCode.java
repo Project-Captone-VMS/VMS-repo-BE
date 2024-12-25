@@ -24,9 +24,12 @@ public enum ErrorCode {
     WAREHOUSE_ALREADY_EXISTS(1012,"Warehouse name anh location exists", HttpStatus.BAD_REQUEST),
     USER_NOT_FOUND(1013, "User not found", HttpStatus.NOT_FOUND),
     DRIVER_NOT_FOUND(1014, "User not found", HttpStatus.NOT_FOUND),
-    INVALID_OLDPASSWORD(1015, "old password invalid",  HttpStatus.BAD_REQUEST),
-    SHIPMENT_NOT_FOUND(1016, "old password invalid",  HttpStatus.BAD_REQUEST),
-    ITEM_NOT_FOUND(1016, "Item not found",  HttpStatus.BAD_REQUEST);
+    INVALID_OLDPASSWORD(1015, "Old password invalid",  HttpStatus.BAD_REQUEST),
+    SHIPMENT_NOT_FOUND(1016, "Old password invalid",  HttpStatus.BAD_REQUEST),
+    ITEM_NOT_FOUND(1016, "Item not found",  HttpStatus.BAD_REQUEST),
+    PHONE_NUMBER_EXISTS(1017, "Phone number exists",  HttpStatus.BAD_REQUEST),
+    EMAIL_EXISTS(1018, "Email exists",  HttpStatus.BAD_REQUEST),
+    ROUTE_NOT_FOUND(1018, "Route not found",  HttpStatus.BAD_REQUEST);
     ;
 
 

@@ -2,6 +2,7 @@ package org.example.vmsproject.service.impl;
 
 import org.example.vmsproject.dto.request.CreateShipment;
 import org.example.vmsproject.dto.request.UpdateShipment;
+import org.example.vmsproject.entity.Route;
 import org.example.vmsproject.entity.Shipment;
 import org.example.vmsproject.exception.AppException;
 import org.example.vmsproject.exception.ErrorCode;
@@ -32,7 +33,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public Shipment saveShipment(CreateShipment request) {
         Shipment shipment = Shipment.builder()
-                .status(request.getStatus())
+                .status(request.isStatus(false))
                 .warehouse(request.getWarehouse())
                 .route(request.getRoute())
                 .build();
@@ -44,15 +45,17 @@ public class ShipmentServiceImpl implements ShipmentService {
         shipmentRepository.deleteById(id);
     }
 
-    @Override
-    public Shipment updateShipment(Long id, UpdateShipment request) {
-        Shipment shipment = shipmentRepository.findById(id).orElseThrow(()->new AppException(ErrorCode.SHIPMENT_NOT_FOUND));
-        shipment.setStatus(request.getStatus());
-        shipmentRepository.save(shipment);
-        return shipment;
-    }
+//    @Override
+//    public Shipment updateShipment(Long id, UpdateShipment request) {
+//        Shipment shipment = shipmentRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.SHIPMENT_NOT_FOUND));
+//        Optional<Route> routeOptional = routeRepository.findById(request.getRoute().getRouteId());
+//        Route route = routeOptional.get();
+//        shipment.setStatus(route.getStatus());
+//        shipmentRepository.save(shipment);
+//        return shipment;
+//    }
 
-    public Optional<Shipment> findByShipment(Long id){
+    public Optional<Shipment> findByShipment(Long id) {
         return shipmentRepository.findById(id);
     }
 }
