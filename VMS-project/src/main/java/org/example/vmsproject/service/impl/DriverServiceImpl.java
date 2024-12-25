@@ -45,8 +45,11 @@ public class DriverServiceImpl implements DriverService {
         if (driverResponseOptional.isEmpty()) {
             throw new AppException(ErrorCode.DRIVER_NOT_FOUND);
         }
-        if(driverRepository.findByLicenseNumber(request.getLicenseNumber())){
+        if(driverRepository.existsByLicenseNumber(request.getLicenseNumber())){
             throw new AppException(ErrorCode.LICENSE_NUMBER_EXISTS);
+        }
+        if(driverRepository.existsByPhoneNumber(request.getPhoneNumber())){
+            throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
         }
         Driver driver = driverResponseOptional.get();
         driver.setFirstName(request.getFirstName());
@@ -96,8 +99,11 @@ public class DriverServiceImpl implements DriverService {
         Driver driver = driverRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.DRIVER_NOT_FOUND));
 
-        if(driverRepository.findByLicenseNumber(request.getLicenseNumber())){
+        if(driverRepository.existsByLicenseNumber(request.getLicenseNumber())){
             throw new AppException(ErrorCode.LICENSE_NUMBER_EXISTS);
+        }
+        if(driverRepository.existsByPhoneNumber(request.getPhoneNumber())){
+            throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
         }
         driver.setEmail(request.getEmail());
         driver.setLicenseNumber(request.getLicenseNumber());
