@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -89,6 +90,22 @@ public class UserController {
         User user = userService.changePassword(username,request);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/checkPhoneNumber/{phoneNumber}")
+    public ResponseEntity<?>checkPhoneNumber(@PathVariable("phoneNumber") String phoneNumber){
+        User user = userService.findUserByPhoneNumber(phoneNumber);
+        return ResponseEntity.ok(user);
+    }
+    @GetMapping("/checkEmail/{email}")
+    public ResponseEntity<?>checkEmail(@PathVariable("email") String email){
+        User user = userService.findUserByPhoneEmail(email);
+        return ResponseEntity.ok(user);
+    }
+
+
+
+
+
 
 
 

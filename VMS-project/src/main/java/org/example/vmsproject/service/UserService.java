@@ -25,4 +25,7 @@ public interface UserService {
     UserResponse getUserByUserName(String userName);
 
     User changePassword(String username, UserRequest request);
+
+    User findUserByPhoneNumber(String phoneNumber);
+    User findUserByPhoneEmail(String email);
 }

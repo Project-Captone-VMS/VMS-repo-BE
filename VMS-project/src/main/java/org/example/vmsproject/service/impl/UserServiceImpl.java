@@ -24,7 +24,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -75,7 +74,6 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(user);
     }
-
 
 
     //    @PreAuthorize("hasRole('ADMIN')")
@@ -143,6 +141,14 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
         }
         return user;
+    }
+
+    public User findUserByPhoneNumber(String phoneNumber){
+        return userRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    public User findUserByPhoneEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
 }
