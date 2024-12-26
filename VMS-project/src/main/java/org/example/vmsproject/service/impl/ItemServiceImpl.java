@@ -15,6 +15,7 @@ import org.example.vmsproject.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -33,44 +34,64 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item saveItem(ItemRequest request) {
-//        Product product = new Product();
-//        int newQuantity = product.getQuantity()-request.getQuantity();
+        Optional<Product> existingProduct = productRepository.findByProductNameAndWarehouse(
+                request.getItemName(),
+                request.getWarehouse()
+        );
 
-                Item item = Item.builder()
+        if (existingProduct.isPresent()) {
+            Product product = existingProduct.get();
+            int newQuantity = product.getQuantity() - request.getQuantity();
+
+            if (newQuantity < 0) {
+                throw new AppException(ErrorCode.INVALID_CAPACITY);
+            }
+
+            product.setQuantity(newQuantity);
+            productRepository.save(product);
+        } else {
+            throw new AppException(ErrorCode.INVALID_PRODUCT);
+        }
+
+        Item item = Item.builder()
                 .itemName(request.getItemName())
                 .price(request.getPrice())
                 .quantity(request.getQuantity())
                 .warehouse(request.getWarehouse())
                 .build();
-        itemRepository.save(item);
 
-//        product=productRepository.findByProductNameAndWarehouse(request.getWarehouse().getProducts().getP)
-//        product = Product.builder()
-//                .quantity(newQuantity)
-//                .build();
-//        productRepository.save(product);
-
-        return item;
+        return itemRepository.save(item);
     }
 
-    @Override
-    public Item updateItem(Long id, ItemRequest request){
 
+    @Override
+    public Item updateItem(Long id, ItemRequest request) {
         Item item = itemRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ITEM_NOT_FOUND));
+        Optional<Product> existingProduct = productRepository.findByProductNameAndWarehouse(
+                request.getItemName(),
+                request.getWarehouse()
+        );
+
+        if (existingProduct.isPresent()) {
+            Product product = existingProduct.get();
+            int quantityDifference = request.getQuantity() - item.getQuantity();
+            int newQuantity = product.getQuantity() - quantityDifference;
+
+            if (newQuantity < 0) {
+                throw new AppException(ErrorCode.INVALID_CAPACITY);
+            }
+            product.setQuantity(newQuantity);
+            productRepository.save(product);
+        } else {
+            throw new AppException(ErrorCode.INVALID_PRODUCT);
+        }
         item.setItemName(request.getItemName());
         item.setPrice(request.getPrice());
         item.setQuantity(request.getQuantity());
-        itemRepository.save(item);
-
-        Product product = new Product();
-        int newQuantity = product.getQuantity()-request.getQuantity();
-        product = Product.builder()
-                .quantity(newQuantity)
-                .build();
-        productRepository.save(product);
-
-        return item;
+        item.setWarehouse(request.getWarehouse());
+        return itemRepository.save(item);
     }
+
 
     @Override
     public void deleteItem(Long id){
