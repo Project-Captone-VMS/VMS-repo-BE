@@ -14,4 +14,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     @Query("select count(*) as total_vehicles From Vehicle ")
     int findTotalVehicles();
+
+    boolean existsByLicensePlate(String licensePlate);
 }

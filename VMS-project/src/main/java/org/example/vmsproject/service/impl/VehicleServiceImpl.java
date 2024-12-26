@@ -2,6 +2,8 @@ package org.example.vmsproject.service.impl;
 
 import org.example.vmsproject.dto.VehicleDTO;
 import org.example.vmsproject.entity.Vehicle;
+import org.example.vmsproject.exception.AppException;
+import org.example.vmsproject.exception.ErrorCode;
 import org.example.vmsproject.repository.VehicleRepository;
 import org.example.vmsproject.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,9 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public String addVehicle(VehicleDTO vehicleDTO) {
         Vehicle vehicle = new Vehicle();
+        if(vehicleRepository.existsByLicensePlate(vehicleDTO.getLicensePlate())){
+            throw new AppException(ErrorCode.LICENSE_PLATE_EXISTS);
+        }
         vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
         vehicle.setType(vehicleDTO.getType());
         vehicle.setCapacity(vehicleDTO.getCapacity());
