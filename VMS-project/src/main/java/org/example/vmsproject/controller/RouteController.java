@@ -2,8 +2,11 @@ package org.example.vmsproject.controller;
 
 import org.example.vmsproject.dto.request.FindSequenceRequest;
 import org.example.vmsproject.entity.Route;
+import org.example.vmsproject.repository.RouteRepository;
 import org.example.vmsproject.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class RouteController {
     @Autowired
     private RouteService routeService;
+    @Autowired
+    private RouteRepository routeRepository;
 
     @GetMapping("/findRoute")
     public String getRoute(
@@ -86,8 +91,10 @@ public class RouteController {
         return routeService.getAllRouteByUserName(username);
     }
 
-    @GetMapping("/all")
-    public List<Route> listAll() {
-        return routeService.getAllRoute();
+    @GetMapping("/getAll")
+    public Page<Route> getRoutesByStatus(@RequestParam boolean status, Pageable pageable) {
+        return routeRepository.findByStatus(status, pageable);
     }
+
+
 }

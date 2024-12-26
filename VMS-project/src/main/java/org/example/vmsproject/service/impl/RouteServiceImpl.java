@@ -12,6 +12,9 @@ import org.example.vmsproject.service.RouteService;
 import org.example.vmsproject.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -256,7 +259,9 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public List<Route> getAllRoute() {
-        return routeRepository.findAll();
+    public Page<Route> getAllRoute(boolean status,int page) {
+        int size = 3;
+        Pageable pageable = PageRequest.of(page, size);
+        return routeRepository.findByStatus(status, pageable);
     }
 }
