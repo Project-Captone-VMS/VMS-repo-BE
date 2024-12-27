@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
     Shipment findShipmentByRoute(Route route);
+    Shipment findShipmentByRouteRouteId(Long routeId);
 }

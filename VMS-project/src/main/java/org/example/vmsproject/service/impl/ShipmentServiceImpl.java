@@ -45,6 +45,11 @@ public class ShipmentServiceImpl implements ShipmentService {
         shipmentRepository.deleteById(id);
     }
 
+    @Override
+    public Shipment findShipmentByRouteId(Long routeId){
+        return shipmentRepository.findShipmentByRouteRouteId(routeId);
+    }
+
 //    @Override
 //    public Shipment updateShipment(Long id, UpdateShipment request) {
 //        Shipment shipment = shipmentRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.SHIPMENT_NOT_FOUND));

@@ -15,5 +15,7 @@ public interface ShipmentService {
 
     void deleteShipment(Long id);
 
+    Shipment findShipmentByRouteId(Long routeId);
+
 //    Shipment updateShipment(Long id, UpdateShipment request);
 }

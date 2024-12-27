@@ -41,4 +41,12 @@ public class ShipmentController {
         shipmentService.deleteShipment(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @GetMapping("getRoute/{routeId}")
+    public ResponseEntity<Shipment> getByRouteId(@PathVariable("routeId") Long routeId) {
+        Shipment shipment = shipmentService.findShipmentByRouteId(routeId);
+        return ResponseEntity.ok(shipment);
+    }
+
+
 }

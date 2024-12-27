@@ -2,6 +2,7 @@ package org.example.vmsproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,9 +32,6 @@ public class Warehouse {
         this.currentStock = 0;
     }
 
-    @OneToMany(mappedBy = "warehouse")
-    @JsonBackReference(value = "warehouse-items")
-    private List<Item> items;
 
     @OneToMany(mappedBy = "warehouse")
     @JsonBackReference(value = "warehouse-shipments")
@@ -42,6 +40,10 @@ public class Warehouse {
     @OneToMany(mappedBy = "warehouse")
     @JsonBackReference(value = "warehouse-products")
     private List<Product> products;
+
+    @OneToMany(mappedBy = "warehouse")
+    @JsonManagedReference(value = "warehouse-items")
+    private List<Item> items;
 
 
 

@@ -96,5 +96,10 @@ public class RouteController {
         return routeRepository.findByStatus(status, pageable);
     }
 
+    @GetMapping("/all")
+    public List<Route> getAllRoutes() {
+        return routeRepository.findAll();
+    }
+
 
 }
