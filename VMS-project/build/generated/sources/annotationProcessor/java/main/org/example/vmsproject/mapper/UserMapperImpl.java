@@ -12,12 +12,17 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     date = "2024-10-29T13:11:06+0700",
 =======
     date = "2024-12-04T13:34:54+0700",
 >>>>>>> Stashed changes
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
+=======
+    date = "2024-12-25T21:59:06+0700",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.13 (Amazon.com Inc.)"
+>>>>>>> NhanTP_fixDriverAndWareHouse
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -58,6 +63,8 @@ public class UserMapperImpl implements UserMapper {
         if ( set != null ) {
             userResponse.roles( new LinkedHashSet<Role>( set ) );
         }
+        userResponse.firstName( user.getFirstName() );
+        userResponse.lastName( user.getLastName() );
 
         return userResponse.build();
     }
@@ -69,6 +76,10 @@ public class UserMapperImpl implements UserMapper {
         }
 
         user.setUsername( request.getUsername() );
+        user.setFirstName( request.getFirstName() );
+        user.setLastName( request.getLastName() );
         user.setPassword( request.getPassword() );
+        user.setEmail( request.getEmail() );
+        user.setPhoneNumber( request.getPhoneNumber() );
     }
 }

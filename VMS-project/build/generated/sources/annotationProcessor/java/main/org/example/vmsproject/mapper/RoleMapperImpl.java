@@ -12,12 +12,17 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     date = "2024-10-28T23:34:25+0700",
 =======
     date = "2024-12-04T13:34:53+0700",
 >>>>>>> Stashed changes
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
+=======
+    date = "2024-12-24T20:10:03+0700",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.13 (Amazon.com Inc.)"
+>>>>>>> NhanTP_fixDriverAndWareHouse
 )
 @Component
 public class RoleMapperImpl implements RoleMapper {
