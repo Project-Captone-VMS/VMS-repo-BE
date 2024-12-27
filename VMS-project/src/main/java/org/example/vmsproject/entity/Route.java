@@ -25,6 +25,8 @@ public class Route {
     private double startLng;
     private double endLat;
     private double endLng;
+    private String startLocationName;
+    private String endLocationName;
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Waypoint> waypoints;

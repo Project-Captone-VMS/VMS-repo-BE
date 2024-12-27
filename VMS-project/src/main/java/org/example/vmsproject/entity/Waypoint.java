@@ -22,6 +22,7 @@ public class Waypoint {
     private int sequence;
     private String estimatedArrival;
     private String estimatedDeparture;
+    private String locationName;
 
     @ManyToOne
     @JsonBackReference

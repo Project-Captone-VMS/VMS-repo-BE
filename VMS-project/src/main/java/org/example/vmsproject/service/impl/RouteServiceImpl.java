@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.vmsproject.dto.response.ApiRouteResponse;
 import org.example.vmsproject.entity.*;
-import org.example.vmsproject.exception.AppException;
+        import org.example.vmsproject.exception.AppException;
 import org.example.vmsproject.exception.ErrorCode;
 import org.example.vmsproject.repository.*;
-import org.example.vmsproject.service.DriverService;
+        import org.example.vmsproject.service.DriverService;
 import org.example.vmsproject.service.RouteService;
 import org.example.vmsproject.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,28 +90,6 @@ public class RouteServiceImpl implements RouteService {
 
 
 
-//        Optional<Route> existingRoute = routeRepository.findRouteByDriverAndVehicle(driverId, vehicleId);
-//        if (existingRoute.isPresent()) {
-//            if(existingRoute.get().getStatus()){
-//                try {
-//                    creatRoute(jsonRespone,existingRoute.get().getDriver().getDriverId(),existingRoute.get().getVehicle().getVehicleId());
-//                    return "Create Route Successfully";
-//                } catch (Exception e) {
-//                    return "Create Route Failed In Set Status " + e.getMessage();
-//                }
-//
-//            }else{
-//                return "Route is not completed. Cannot create new.";
-//            }
-//        }else{
-//            try {
-//                creatRoute(jsonRespone,driverId,vehicleId);
-//                return "Create Route Successfully";
-//            } catch (Exception e) {
-//                return "Create Route Failed " + e.getMessage();
-//            }
-//        }
-
         try {
             creatRoute(jsonRespone,driverId,vehicleId);
             return "Create Route Successfully";
@@ -119,6 +97,30 @@ public class RouteServiceImpl implements RouteService {
             return "Create Route Failed " + e.getMessage();
         }
 
+    }
+
+    public String getAddressFromCoordinates(double lat, double lng) {
+        String url = "https://revgeocode.search.hereapi.com/v1/revgeocode";
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("at", lat + "," + lng)
+                .queryParam("lang", "en-US")
+                .queryParam("apiKey", apiKey);
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            Map response = restTemplate.getForObject(uriBuilder.toUriString(), Map.class);
+
+            if (response != null && response.containsKey("items")) {
+                var items = (Iterable<Map<String, Object>>) response.get("items");
+                if (items.iterator().hasNext()) {
+                    Map<String, Object> firstItem = items.iterator().next();
+                    return (String) firstItem.getOrDefault("title", "");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Reverse geocoding error: " + e.getMessage());
+        }
+        return null;
     }
 
 
@@ -141,7 +143,17 @@ public class RouteServiceImpl implements RouteService {
             route.setStartLng(waypoints.get(0).getLng());
             route.setEndLat(waypoints.get(waypoints.size() - 1).getLat());
             route.setEndLng(waypoints.get(waypoints.size() - 1).getLng());
+            String startLocationName = getAddressFromCoordinates(
+                    waypoints.get(0).getLat(),
+                    waypoints.get(0).getLng()
+            );
+            route.setStartLocationName(startLocationName);
 
+            String endLocationName = getAddressFromCoordinates(
+                    waypoints.get(waypoints.size() - 1).getLat(),
+                    waypoints.get(waypoints.size() - 1).getLng()
+            );
+            route.setEndLocationName(endLocationName);
 
             Optional<Driver> driver = driverService.getDriverById(driverId);
             Optional<Vehicle> vehicle = vehicleService.getVehicleById(vehicleId);
@@ -166,7 +178,8 @@ public class RouteServiceImpl implements RouteService {
                 waypointEntity.setEstimatedArrival(waypoint.getEstimatedArrival());
                 waypointEntity.setEstimatedDeparture(waypoint.getEstimatedDeparture());
                 waypointEntity.setRoute(savedRoute);
-
+                String locationName = getAddressFromCoordinates(waypoint.getLat(), waypoint.getLng());
+                waypointEntity.setLocationName(locationName);
                 waypointsEntities.add(waypointEntity);
             }
             waypointRepository.saveAll(waypointsEntities);
@@ -259,7 +272,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Page<Route> getAllRoute(boolean status,int page) {
+    public Page<Route> getAllRoute(boolean status, int page) {
         int size = 3;
         Pageable pageable = PageRequest.of(page, size);
         return routeRepository.findByStatus(status, pageable);

@@ -22,7 +22,7 @@ public class SecurityConfig {
 
     private final String[] PUBLIC_ENDPOINTS = {
             "/api/auth/token", "/api/auth/introspect", "/api/auth/logout", "/api/auth/refresh","/ws/**","/api/user/create",
-            "/api/driver/update/1","/api/driver/all"
+            "/api/driver/update/1","/api/driver/all", "/api/user/checkEmail/**","api/user/checkPhoneNumber/**"
     };
 
 //    @Value("${jwt.signerKey}")
