@@ -4,7 +4,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.annotation.processing.Generated;
 import org.example.vmsproject.dto.DriverDTO;
+import org.example.vmsproject.dto.request.DriverRequest;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
+import org.example.vmsproject.dto.response.DriverResponse;
 import org.example.vmsproject.dto.response.UserResponse;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.entity.Role;
@@ -13,14 +15,31 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-01T13:51:24+0700",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.11 (Oracle Corporation)"
+    date = "2024-12-28T11:46:24+0700",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.13 (Amazon.com Inc.)"
 )
 @Component
 public class DriverMapperImpl implements DriverMapper {
 
     @Override
-    public Driver toDriver(DriverDTO request) {
+    public Driver toDriverDTO(DriverDTO request) {
+        if ( request == null ) {
+            return null;
+        }
+
+        Driver.DriverBuilder driver = Driver.builder();
+
+        driver.firstName( request.getFirstName() );
+        driver.lastName( request.getLastName() );
+        driver.licenseNumber( request.getLicenseNumber() );
+        driver.email( request.getEmail() );
+        driver.phoneNumber( request.getPhoneNumber() );
+
+        return driver.build();
+    }
+
+    @Override
+    public Driver toDriver(DriverRequest request) {
         if ( request == null ) {
             return null;
         }
@@ -33,10 +52,30 @@ public class DriverMapperImpl implements DriverMapper {
         driver.licenseNumber( request.getLicenseNumber() );
         driver.workSchedule( request.getWorkSchedule() );
         driver.status( request.getStatus() );
-        driver.isDeleted( request.getIsDeleted() );
-        driver.deleteAt( request.getDeleteAt() );
+        driver.email( request.getEmail() );
+        driver.phoneNumber( request.getPhoneNumber() );
 
         return driver.build();
+    }
+
+    @Override
+    public DriverResponse toDriverResponse(Driver driver) {
+        if ( driver == null ) {
+            return null;
+        }
+
+        DriverResponse.DriverResponseBuilder driverResponse = DriverResponse.builder();
+
+        driverResponse.driverId( driver.getDriverId() );
+        driverResponse.firstName( driver.getFirstName() );
+        driverResponse.lastName( driver.getLastName() );
+        driverResponse.licenseNumber( driver.getLicenseNumber() );
+        driverResponse.workSchedule( driver.getWorkSchedule() );
+        if ( driver.getStatus() != null ) {
+            driverResponse.status( String.valueOf( driver.getStatus() ) );
+        }
+
+        return driverResponse.build();
     }
 
     @Override
@@ -56,6 +95,8 @@ public class DriverMapperImpl implements DriverMapper {
         if ( set != null ) {
             userResponse.roles( new LinkedHashSet<Role>( set ) );
         }
+        userResponse.firstName( user.getFirstName() );
+        userResponse.lastName( user.getLastName() );
 
         return userResponse.build();
     }
@@ -67,6 +108,10 @@ public class DriverMapperImpl implements DriverMapper {
         }
 
         user.setUsername( request.getUsername() );
+        user.setFirstName( request.getFirstName() );
+        user.setLastName( request.getLastName() );
         user.setPassword( request.getPassword() );
+        user.setEmail( request.getEmail() );
+        user.setPhoneNumber( request.getPhoneNumber() );
     }
 }

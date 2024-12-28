@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+ll<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
@@ -52,6 +52,36 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f89c6db8d8912cef8ab572495dd9b807ed776116
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build VMS-project.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.VmsProjectApplication.executor&quot;: &quot;Run&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+<<<<<<< HEAD
+    &quot;last_opened_file_path&quot;: &quot;E:/.Project_Capston/project-finish/v2/VMS-repo-BE/VMS-project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+=======
+    &quot;last_opened_file_path&quot;: &quot;E:/.Project_Capston/git-merge/VMS-repo-BE/VMS-project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+=======
+>>>>>>> NhanTP_fixDriverAndWareHouse
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.Build VMS-project.executor": "Run",
@@ -63,18 +93,48 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.VmsProjectApplication.executor": "Run",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/.Project_Capston/project_14_11/VMS-repo-BE/VMS-project",
+    "last_opened_file_path": "E:/.Project_Capston/project-finish/VMS-repo-BE/VMS-project",
     "project.structure.last.edited": "Project",
+<<<<<<< HEAD
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build VMS-project.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.VmsProjectApplication.executor&quot;: &quot;Run&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/.Project_Capston/merge_v1/VMS-repo-BE/VMS-project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+>>>>>>> Stashed changes
+=======
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+>>>>>>> 64a385dce7206ca683604aba7ebd9e45b48e6705
+>>>>>>> f89c6db8d8912cef8ab572495dd9b807ed776116
+>>>>>>> NhanTP_fixDriverAndWareHouse
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\.Project_Capston\project-finish\v2\VMS-repo-BE\VMS-project" />
+      <recent name="E:\.Project_Capston\git-merge\VMS-repo-BE\VMS-project" />
+      <recent name="E:\.Project_Capston\project_14-11-v2\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject" />
       <recent name="E:\.Project_Capston\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject\service\impl" />
       <recent name="E:\.Project_Capston\VMS-repo-BE\VMS-project\src\main\java\org\example\vmsproject" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.vmsproject.repository" />
+      <recent name="org.example.vmsproject.entity" />
+      <recent name="org.example.vmsproject.dto" />
       <recent name="org.example.vmsproject.mapper" />
     </key>
   </component>
@@ -140,7 +200,51 @@
       <workItem from="1730731197493" duration="137000" />
       <workItem from="1731567936475" duration="1128000" />
       <workItem from="1731598501191" duration="67000" />
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+      <workItem from="1731604975942" duration="173000" />
+      <workItem from="1731605170501" duration="458000" />
+      <workItem from="1731824660754" duration="35000" />
+      <workItem from="1733294052952" duration="477000" />
+      <workItem from="1733294596585" duration="8000" />
+      <workItem from="1733294691398" duration="5506000" />
+      <workItem from="1733380387078" duration="1887000" />
+      <workItem from="1733411825457" duration="613000" />
+>>>>>>> Stashed changes
+=======
+      <workItem from="1731604975942" duration="173000" />
+      <workItem from="1731605170501" duration="458000" />
+      <workItem from="1731824660754" duration="35000" />
+<<<<<<< HEAD
+      <workItem from="1734946559738" duration="4491000" />
+      <workItem from="1734965065106" duration="9398000" />
+      <workItem from="1734975372521" duration="334000" />
+      <workItem from="1735035287214" duration="411000" />
+      <workItem from="1735035808811" duration="131000" />
+=======
+      <workItem from="1734947317850" duration="180000" />
+<<<<<<< HEAD
+      <workItem from="1734947658511" duration="1275000" />
+      <workItem from="1734965040868" duration="22000" />
+      <workItem from="1735036082371" duration="4000" />
+      <workItem from="1735045085482" duration="339000" />
+=======
+>>>>>>> 64a385dce7206ca683604aba7ebd9e45b48e6705
+>>>>>>> f89c6db8d8912cef8ab572495dd9b807ed776116
+>>>>>>> NhanTP_fixDriverAndWareHouse
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/vmsproject/controller/DriverController.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
