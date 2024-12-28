@@ -32,14 +32,8 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     public Shipment saveShipment(CreateShipment request) {
-        Shipment newShipment= new Shipment();
-        Shipment shipment = shipmentRepository.findShipmentByRouteRouteId(request.getRoute().getRouteId());
-        if(shipment.equals(newShipment)){
-
-        }
-        shipment = Shipment.builder()
+        Shipment shipment = Shipment.builder()
                 .status(request.isStatus(false))
-//                .warehouse(request.getWarehouse())
                 .route(request.getRoute())
                 .build();
         return shipmentRepository.save(shipment);
@@ -51,7 +45,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public Shipment findShipmentByRouteId(Long routeId) {
+    public Shipment findShipmentByRouteId(Long routeId){
         return shipmentRepository.findShipmentByRouteRouteId(routeId);
     }
 
