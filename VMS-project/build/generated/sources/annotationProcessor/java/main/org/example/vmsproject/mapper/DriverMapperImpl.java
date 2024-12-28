@@ -15,11 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-<<<<<<< HEAD
-    date = "2024-12-28T11:46:24+0700",
-=======
-    date = "2024-12-27T22:03:52+0700",
->>>>>>> NhanTP_finish-function
+    date = "2024-12-28T12:33:11+0700",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.13 (Amazon.com Inc.)"
 )
 @Component

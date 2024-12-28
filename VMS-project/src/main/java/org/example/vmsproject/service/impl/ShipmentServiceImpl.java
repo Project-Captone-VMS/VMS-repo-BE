@@ -34,7 +34,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     public Shipment saveShipment(CreateShipment request) {
         Shipment shipment = Shipment.builder()
                 .status(request.isStatus(false))
-                .warehouse(request.getWarehouse())
+//                .warehouse(request.getWarehouse())
                 .route(request.getRoute())
                 .build();
         return shipmentRepository.save(shipment);

@@ -80,8 +80,7 @@ public class DriverServiceImpl implements DriverService {
             driverRepository.save(driver);
 
             User user = userRepository.findUserByDriver(driver.getUser().getDriver());
-            user.setIsDeleted(true);
-            userRepository.save(user);
+            userRepository.deleteByUsername(user.getUsername());
             return "Driver deleted successfully.";
         } else {
             return "Driver not found.";

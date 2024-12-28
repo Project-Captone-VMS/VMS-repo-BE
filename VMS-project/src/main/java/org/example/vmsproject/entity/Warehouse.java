@@ -33,18 +33,17 @@ public class Warehouse {
     }
 
 
-    @OneToMany(mappedBy = "warehouse")
-    @JsonBackReference(value = "warehouse-shipments")
-    private List<Shipment> shipments;
+//    @OneToMany(mappedBy = "warehouse")
+//    @JsonBackReference(value = "warehouse-shipments")
+//    private List<Shipment> shipments;
 
     @OneToMany(mappedBy = "warehouse")
     @JsonBackReference(value = "warehouse-products")
     private List<Product> products;
 
-    @OneToMany(mappedBy = "warehouse")
+    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "warehouse-items")
     private List<Item> items;
-
 
 
     public void addCurrentStock(int quantity) {

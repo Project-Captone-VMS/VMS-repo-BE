@@ -2,6 +2,7 @@ package org.example.vmsproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,11 +31,13 @@ public class Shipment {
 
     @ManyToOne
     @JoinColumn(name = "route_id")
-//    @JsonBackReference
     private Route route;
 
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id")
-//    @JsonBackReference
-    private Warehouse warehouse;
+//    @ManyToOne
+//    @JoinColumn(name = "warehouse_id")
+//    private Warehouse warehouse;
+
+    @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "shipment-items")
+    private List<Item> items;
 }

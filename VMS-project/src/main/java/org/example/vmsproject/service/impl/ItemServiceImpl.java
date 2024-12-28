@@ -58,6 +58,7 @@ public class ItemServiceImpl implements ItemService {
                 .price(request.getPrice())
                 .quantity(request.getQuantity())
                 .warehouse(request.getWarehouse())
+                .shipment(request.getShipment())
                 .build();
 
         return itemRepository.save(item);
