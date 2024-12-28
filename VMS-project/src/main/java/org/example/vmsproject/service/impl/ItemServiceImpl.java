@@ -2,6 +2,7 @@ package org.example.vmsproject.service.impl;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.transaction.Transactional;
 import org.example.vmsproject.dto.request.ItemRequest;
 import org.example.vmsproject.entity.Item;
 import org.example.vmsproject.entity.Product;
@@ -33,17 +34,9 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findAllByShipmentId(id);
     }
 
+    @Transactional
     @Override
     public Item saveItem(ItemRequest request) {
-        Optional<Item> existingItem = itemRepository.findByShipmentIdAndItemName(
-                request.getShipment().getShipmentId(), request.getItemName());
-
-        if (existingItem.isPresent()) {
-            Item item = existingItem.get();
-            item.setQuantity(item.getQuantity() + request.getQuantity());
-            itemRepository.save(item);
-            return item;
-        }
 
         Optional<Product> existingProduct = productRepository.findByProductNameAndWarehouse(
                 request.getItemName(),
@@ -63,20 +56,17 @@ public class ItemServiceImpl implements ItemService {
         } else {
             throw new AppException(ErrorCode.INVALID_PRODUCT);
         }
-
-        Item newItem = Item.builder()
+        Item item = Item.builder()
                 .itemName(request.getItemName())
                 .price(request.getPrice())
                 .quantity(request.getQuantity())
                 .warehouse(request.getWarehouse())
                 .shipment(request.getShipment())
                 .build();
-        itemRepository.save(newItem);
 
-        return newItem;
+
+        return itemRepository.save(item);
     }
-
-
 
 
     @Override

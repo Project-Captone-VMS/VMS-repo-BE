@@ -16,7 +16,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     Optional<Item> findByItemNameAndShipment(String itemName, Shipment shipment);
 
-    @Query("SELECT i FROM Item i WHERE i.shipment.shipmentId = :shipment_id AND i.itemName = :item_name")
-    Optional<Item> findByShipmentIdAndItemName(@Param("shipment_id") Long shipment_id, @Param("item_name") String item_name);
+//    @Query("SELECT i FROM Item i WHERE i.shipment.shipmentId = :shipment_id AND i.itemName = :item_name")
+//    <Item> findByShipmentIdAndItemName(@Param("shipment_id") Long shipment_id, @Param("item_name") String item_name);
 
 }
