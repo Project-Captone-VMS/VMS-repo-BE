@@ -1,7 +1,9 @@
 package org.example.vmsproject.dto;
 
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.example.vmsproject.entity.Role;
 

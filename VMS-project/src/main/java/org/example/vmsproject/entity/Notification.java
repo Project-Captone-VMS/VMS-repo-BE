@@ -28,6 +28,6 @@ public class Notification {
 
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "notification")
-    private List<UserNotification> userNotifications;
+//    @OneToMany(mappedBy = "notification")
+//    private List<UserNotification> userNotifications;
 }

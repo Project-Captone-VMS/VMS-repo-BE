@@ -17,6 +17,6 @@ public class DriverResponse {
     private String licenseNumber;
     private String workSchedule;
     private String status;
-    private Boolean isDeleted = false;
-    private LocalDateTime deleteAt;
+//    private Boolean isDeleted = false;
+//    private LocalDateTime deleteAt;
 }

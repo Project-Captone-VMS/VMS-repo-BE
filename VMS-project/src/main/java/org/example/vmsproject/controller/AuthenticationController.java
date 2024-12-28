@@ -4,10 +4,10 @@ import com.nimbusds.jose.JOSEException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-
 import org.example.vmsproject.dto.request.AuthenticationRequest;
 import org.example.vmsproject.dto.request.IntrospectRequest;
 import org.example.vmsproject.dto.request.LogoutRequest;
+import org.example.vmsproject.dto.request.RefreshRequest;
 import org.example.vmsproject.dto.response.ApiResponse;
 import org.example.vmsproject.dto.response.AuthenticationResponse;
 import org.example.vmsproject.dto.response.IntrospectionResponse;
@@ -44,5 +44,12 @@ public class AuthenticationController {
     ApiResponse<Void> logout(@RequestBody LogoutRequest request) throws ParseException, JOSEException {
         authenticationService.logout(request);
         return ApiResponse.<Void>builder().build();
+    }
+
+    @PostMapping("/refresh")
+    ApiResponse<AuthenticationResponse>authenticate(@RequestBody RefreshRequest request) throws ParseException, JOSEException {
+        var result = authenticationService.refeshToken(request);
+        return ApiResponse.<AuthenticationResponse>builder()
+                .result(result).build();
     }
 }

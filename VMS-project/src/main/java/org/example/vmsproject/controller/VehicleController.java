@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vehicle")
@@ -25,9 +26,9 @@ public class VehicleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Vehicle> getVehicleById(@PathVariable("id") long id) {
-        Vehicle vehicle = vehicleService.getVehicleById(id);
+        Optional<Vehicle> vehicle = vehicleService.getVehicleById(id);
         if (vehicle != null) {
-            return ResponseEntity.ok(vehicle);
+            return ResponseEntity.ok(vehicle.get());
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -48,6 +49,18 @@ public class VehicleController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDriver(@PathVariable("id") long id) {
         String result = vehicleService.deleteVehicle(id);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/No-Active")
+    public ResponseEntity<List<Vehicle>> getNoActiveDrivers() {
+        List<Vehicle> vehicle = vehicleService.getAllVehiclesNoActive();
+        return ResponseEntity.ok(vehicle);
+    }
+
+    @GetMapping("/totalVehicle")
+    public ResponseEntity<?> getTotalvehicle() {
+        int result = vehicleService.totalVehicles();
         return ResponseEntity.ok(result);
     }
 }

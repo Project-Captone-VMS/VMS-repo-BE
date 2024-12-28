@@ -1,11 +1,11 @@
 package org.example.vmsproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.internal.util.StringHelper;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 
@@ -27,8 +27,11 @@ public class User {
     String password;
     String email;
     String phoneNumber;
+    private Boolean isDeleted = false;
 
     @ManyToMany
     Set<Role> roles;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Driver driver;
 
 }

@@ -1,11 +1,8 @@
 package org.example.vmsproject.dto.request;
 
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.example.vmsproject.validator.DobConstraint;
-
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateUserRequest {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 //    @Size(min = 5, message = "USERNAME_INVALID")
     String username;

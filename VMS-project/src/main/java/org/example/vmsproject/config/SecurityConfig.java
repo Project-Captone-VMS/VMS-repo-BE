@@ -21,7 +21,8 @@ public class SecurityConfig {
     private CustomJwtDecoder customJwtDecoder;
 
     private final String[] PUBLIC_ENDPOINTS = {
-                "/api/auth/token", "/api/auth/introspect", "/api/auth/logout",  "/api/user/create", "/api/vehicle/all"
+            "/api/auth/token", "/api/auth/introspect", "/api/auth/logout", "/api/auth/refresh","/ws/**","/api/user/create",
+            "/api/driver/update/1","/api/driver/all", "/api/user/checkEmail/**","api/user/checkPhoneNumber/**"
     };
 
 //    @Value("${jwt.signerKey}")
@@ -38,8 +39,8 @@ public class SecurityConfig {
 //        oauth2.jwt(jwtConfigurer -> jwtConfigurer.jwkSetUri()) đăng nhập từ bên ngoài
         httpSecurity.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer ->
-                        jwtConfigurer.decoder(customJwtDecoder)
-                                .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                                jwtConfigurer.decoder(customJwtDecoder)
+                                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
                         .authenticationEntryPoint(new JwtAuthenticationEntrypoint())
 
         );

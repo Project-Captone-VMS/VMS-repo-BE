@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.vmsproject.dto.request.AuthenticationRequest;
 import org.example.vmsproject.dto.request.IntrospectRequest;
 import org.example.vmsproject.dto.request.LogoutRequest;
+import org.example.vmsproject.dto.request.RefreshRequest;
 import org.example.vmsproject.dto.response.AuthenticationResponse;
 import org.example.vmsproject.dto.response.IntrospectionResponse;
 import org.example.vmsproject.entity.InvalidatedToken;
@@ -49,6 +50,14 @@ public class AuthenticationServiceImpl {
     @Value("${jwt.signerKey}")
     protected String SIGNER_KEY;
 
+    @NonFinal
+    @Value("${jwt.valid-duration}")
+    protected long VALID_DURATION;
+
+    @NonFinal
+    @Value("${jwt.refreshable-duration}")
+    protected long REFRESHABLE_DURATION;
+
     public AuthenticationResponse authentication(AuthenticationRequest request) {
         var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTS));
@@ -75,7 +84,7 @@ public class AuthenticationServiceImpl {
         boolean isValid = true;
 
         try {
-            verifyToken(token);
+            verifyToken(token, false);
         } catch (AppException e) {
             isValid = false;
         }
@@ -86,7 +95,7 @@ public class AuthenticationServiceImpl {
 
     public void logout(LogoutRequest request) throws ParseException, JOSEException {
         try {
-            var signToken = verifyToken(request.getToken());
+            var signToken = verifyToken(request.getToken(), true);
 
             String jit = signToken.getJWTClaimsSet().getJWTID();
             Date expiryTime = signToken.getJWTClaimsSet().getExpirationTime();
@@ -100,11 +109,34 @@ public class AuthenticationServiceImpl {
         }
     }
 
-    private SignedJWT verifyToken(String token) throws JOSEException, ParseException {
+    public AuthenticationResponse refeshToken(RefreshRequest request) throws ParseException, JOSEException {
+        var signedJWT = verifyToken(request.getToken(), true);
+        var jit = signedJWT.getJWTClaimsSet().getJWTID();
+        var expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+
+        InvalidatedToken invalidatedToken =
+                InvalidatedToken.builder().id(jit).expiryTime(expiryTime).build();
+
+        invalidatedTokenRepository.save(invalidatedToken);
+        var username = signedJWT.getJWTClaimsSet().getSubject();
+        var user = userRepository.findByUsername(username).orElseThrow(
+                () -> new AppException(ErrorCode.UNAUTHENTICATED)
+        );
+        var token = generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(token)
+                .authenticated(true)
+                .build();
+    }
+
+    private SignedJWT verifyToken(String token, boolean isRefresh) throws JOSEException, ParseException {
         JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
         SignedJWT signedJWT = SignedJWT.parse(token);
         signedJWT.verify(verifier);
-        Date expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+        Date expiryTime = (isRefresh) ? new Date(signedJWT.getJWTClaimsSet().getIssueTime()
+                .toInstant().plus(REFRESHABLE_DURATION, ChronoUnit.SECONDS).toEpochMilli())
+                : signedJWT.getJWTClaimsSet().getExpirationTime();
+
         var verified = signedJWT.verify(verifier);
         if (!(verified && expiryTime.after(new Date())))
             throw new AppException(ErrorCode.UNAUTHENTICATED);
@@ -121,7 +153,7 @@ public class AuthenticationServiceImpl {
                 .issuer("VMS-Project")
                 .issueTime(new Date())
                 .expirationTime(new Date(
-                        Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
+                        Instant.now().plus(VALID_DURATION, ChronoUnit.SECONDS).toEpochMilli()
                 ))
                 .jwtID(UUID.randomUUID().toString())
                 .claim("scope", buildScope(user))
@@ -154,5 +186,23 @@ public class AuthenticationServiceImpl {
         return stringJoiner.toString();
     }
 
-
+//    public AuthenticationResponse refeshToken(RefreshRequest request) throws ParseException, JOSEException {
+//        var signedJWT = verifyToken(request.getToken(), true);
+//        var jit = signedJWT.getJWTClaimsSet().getJWTID();
+//        var expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+//
+//        InvalidatedToken invalidatedToken =
+//                InvalidatedToken.builder().id(jit).expiryTime(expiryTime).build();
+//
+//        invalidatedTokenRepository.save(invalidatedToken);
+//        var username = signedJWT.getJWTClaimsSet().getSubject();
+//        var user = userRepository.findByUsername(username).orElseThrow(
+//                () -> new AppException(ErrorCode.UNAUTHENTICATED)
+//        );
+//        var token = generateToken(user);
+//        return AuthenticationResponse.builder()
+//                .token(token)
+//                .authenticated(true)
+//                .build();
+//    }
 }

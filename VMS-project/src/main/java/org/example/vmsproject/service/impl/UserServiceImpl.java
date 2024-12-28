@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.example.vmsproject.dto.request.CreateUserRequest;
 import org.example.vmsproject.dto.request.UpdateUserRequest;
+import org.example.vmsproject.dto.request.UserRequest;
 import org.example.vmsproject.dto.response.UserResponse;
 import org.example.vmsproject.entity.Driver;
 import org.example.vmsproject.entity.Role;
@@ -19,6 +20,7 @@ import org.example.vmsproject.repository.UserRepository;
 import org.example.vmsproject.service.UserService;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,13 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTS);
         }
+        if(userRepository.existsByPhoneNumber(request.getPhoneNumber())){
+            throw new AppException(ErrorCode.PHONE_NUMBER_EXISTS);
+        }
+        if(userRepository.existsByEmail(request.getEmail())){
+            throw new AppException(ErrorCode.EMAIL_EXISTS);
+        }
+
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
@@ -50,15 +59,18 @@ public class UserServiceImpl implements UserService {
         roles.add(userRole);
         user.setRoles(roles);
 
-        Driver driver = Driver.builder().driverId(request.getId())
+        Driver driver = Driver.builder()
+                .driverId(request.getId())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .phoneNumber(request.getPhoneNumber())
                 .isDeleted(false)
+                .status(false)
+                .phoneNumber(request.getPhoneNumber())
+                .user(user)
                 .build();
 
-        driverRepository.save(driver);
+        user.setDriver(driver);
 
         return userRepository.save(user);
     }
@@ -72,10 +84,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
     }
 
-    @Override
-    public void deleteUser(String id) {
-        userRepository.deleteById(id);
-    }
+//    @Override
+//    public void deleteUser(String id) {
+//        userRepository.deleteById(id);
+//    }
 
     @PostAuthorize("returnObject.username==authentication.name")
     @Override
@@ -93,17 +105,50 @@ public class UserServiceImpl implements UserService {
         return userMapper.toUserResponse(user);
     }
 
+
+
     @Override
     public UserResponse updateUser(String userId, UpdateUserRequest request) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_EXISTS));
-
+        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         userMapper.updateUser(user, request);
+
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        var roles = roleRepository.findAllById(request.getRoles());
-        user.setRoles(new HashSet<>(roles));
-
+//        user.setEmail(request.getEmail());
+//        user.getPhoneNumber(request,)
+//        var roles = roleRepository.findAllById(request.getRoles());
+//        user.setRoles(new HashSet<>(roles));
         return userMapper.toUserResponse(userRepository.save(user));
+    }
+
+    @Override
+    public UserResponse getUserByUserName(String userName) {
+        User user = userRepository.findByUsername(userName)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return userMapper.toUserResponse(user);
+    }
+
+
+    @Override
+    public User changePassword(String username, UserRequest request ) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTS));
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        boolean authenticated = passwordEncoder.matches(request.getOldPassword(), user.getPassword());
+        if (!authenticated) {
+            throw new AppException(ErrorCode.INVALID_OLDPASSWORD);
+        }else{
+            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+            userRepository.save(user);
+        }
+        return user;
+    }
+
+    public User findUserByPhoneNumber(String phoneNumber){
+        return userRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    public User findUserByPhoneEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
 }
