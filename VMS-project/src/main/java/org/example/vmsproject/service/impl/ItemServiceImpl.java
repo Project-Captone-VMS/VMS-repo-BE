@@ -5,6 +5,7 @@ import jakarta.persistence.ManyToOne;
 import org.example.vmsproject.dto.request.ItemRequest;
 import org.example.vmsproject.entity.Item;
 import org.example.vmsproject.entity.Product;
+import org.example.vmsproject.entity.Shipment;
 import org.example.vmsproject.entity.Warehouse;
 import org.example.vmsproject.exception.AppException;
 import org.example.vmsproject.exception.ErrorCode;
@@ -34,6 +35,16 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item saveItem(ItemRequest request) {
+        Optional<Item> existingItem = itemRepository.findByShipmentIdAndItemName(
+                request.getShipment().getShipmentId(), request.getItemName());
+
+        if (existingItem.isPresent()) {
+            Item item = existingItem.get();
+            item.setQuantity(item.getQuantity() + request.getQuantity());
+            itemRepository.save(item);
+            return item;
+        }
+
         Optional<Product> existingProduct = productRepository.findByProductNameAndWarehouse(
                 request.getItemName(),
                 request.getWarehouse()
@@ -53,17 +64,19 @@ public class ItemServiceImpl implements ItemService {
             throw new AppException(ErrorCode.INVALID_PRODUCT);
         }
 
-        Item item = Item.builder()
+        Item newItem = Item.builder()
                 .itemName(request.getItemName())
                 .price(request.getPrice())
                 .quantity(request.getQuantity())
                 .warehouse(request.getWarehouse())
                 .shipment(request.getShipment())
                 .build();
+        itemRepository.save(newItem);
 
-
-        return itemRepository.save(item);
+        return newItem;
     }
+
+
 
 
     @Override
