@@ -7,7 +7,7 @@ import org.example.vmsproject.entity.Item;
 import java.util.List;
 
 public interface ItemService {
-     List<Item> getAllByWarehouseId(Long id);
+     List<Item> getAllByShipmentId(Long id);
 
     Item saveItem(ItemRequest request);
 

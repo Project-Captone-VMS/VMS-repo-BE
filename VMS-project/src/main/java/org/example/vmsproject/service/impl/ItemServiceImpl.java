@@ -27,9 +27,9 @@ public class ItemServiceImpl implements ItemService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Item> getAllByWarehouseId(Long id){
+    public List<Item> getAllByShipmentId(Long id){
 
-        return itemRepository.findAllByWarehouseWarehouseId(id);
+        return itemRepository.findAllByShipmentId(id);
     }
 
     @Override

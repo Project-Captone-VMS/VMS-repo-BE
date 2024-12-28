@@ -21,7 +21,7 @@ public class ItemController {
 
     @GetMapping("getAll/{id}")
     public ResponseEntity<List<Item>>getAll(@PathVariable("id") Long id){
-        List<Item> itemList = itemService.getAllByWarehouseId(id);
+        List<Item> itemList = itemService.getAllByShipmentId(id);
         return ResponseEntity.ok(itemList);
     }
     @PostMapping("save")
